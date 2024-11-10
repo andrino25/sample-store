@@ -114,49 +114,48 @@ const About = () => {
 </div>
 
       {/* Social Media Section with Footer */}
-      <div className="bg-gray-900 text-white py-16">
-        <div className="flex flex-col items-center mb-12">
-          <h2 className="text-4xl font-extrabold text-white mb-6">
-            Follow Us on Social Media
-          </h2>
-          <p className="text-xl text-center mb-8">
-            Stay connected with us and keep up with the latest updates! Follow
-            us on our social media channels:
-          </p>
-          <div className="flex space-x-8 justify-center">
-            {/* Social Media Icons */}
-            {[
-              { src: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg", alt: "Facebook", href: "https://facebook.com" },
-              { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png", alt: "YouTube", href: "https://youtube.com" },
-              { src: "https://img.freepik.com/premium-vector/tiktok-logo-sticker_941327-31.jpg?semt=ais_hybrid", alt: "TikTok", href: "https://tiktok.com" },
-              { src: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", alt: "Instagram", href: "https://instagram.com" },
-              { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Pinterest.svg/1200px-Pinterest.svg.png", alt: "Pinterest", href: "https://pinterest.com" },
-              { src: "https://cdn.worldvectorlogo.com/logos/twitter-logo-2.svg", alt: "Twitter", href: "https://twitter.com" },
-              { src: "https://www.svgrepo.com/show/303130/snapchat-logo.svg", alt: "Snapchat", href: "https://snapchat.com" },
-              { src: "https://www.logo.wine/a/logo/Telegram_(software)/Telegram_(software)-Logo.wine.svg", alt: "Telegram", href: "https://telegram.org" }
-            ].map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transform hover:scale-125 transition-all"
-              >
-                <img
-                  src={social.src}
-                  alt={social.alt}
-                  className="h-12 w-12 rounded-full shadow-xl hover:shadow-2xl transition-all"
-                />
-              </a>
-            ))}
-          </div>
-        </div>
+      <div className="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+  <div className="flex flex-col items-center mb-12">
+    <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-6 text-center">
+      Follow Us on Social Media
+    </h2>
+    <p className="text-lg sm:text-xl text-center mb-8">
+      Stay connected with us and keep up with the latest updates! Follow us on our social media channels:
+    </p>
+    <div className="flex flex-wrap space-x-4 sm:space-x-8 justify-center">
+      {[
+        { src: "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg", alt: "Facebook", href: "https://facebook.com" },
+        { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png", alt: "YouTube", href: "https://youtube.com" },
+        { src: "https://img.freepik.com/premium-vector/tiktok-logo-sticker_941327-31.jpg?semt=ais_hybrid", alt: "TikTok", href: "https://tiktok.com" },
+        { src: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", alt: "Instagram", href: "https://instagram.com" },
+        { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Pinterest.svg/1200px-Pinterest.svg.png", alt: "Pinterest", href: "https://pinterest.com" },
+        { src: "https://cdn.worldvectorlogo.com/logos/twitter-logo-2.svg", alt: "Twitter", href: "https://twitter.com" },
+        { src: "https://www.svgrepo.com/show/303130/snapchat-logo.svg", alt: "Snapchat", href: "https://snapchat.com" },
+        { src: "https://www.logo.wine/a/logo/Telegram_(software)/Telegram_(software)-Logo.wine.svg", alt: "Telegram", href: "https://telegram.org" }
+      ].map((social, index) => (
+        <a
+          key={index}
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="m-2 transform hover:scale-110 transition-all"
+        >
+          <img
+            src={social.src}
+            alt={social.alt}
+            className="h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-xl hover:shadow-2xl transition-all"
+          />
+        </a>
+      ))}
+    </div>
+  </div>
 
-        {/* Footer Section */}
-        <div className="text-center text-sm text-gray-400 py-8">
-          <p>&copy; 2024 Makeup Magic. All rights reserved.</p>
-        </div>
-      </div>
+  {/* Footer Section */}
+  <div className="text-center text-xs sm:text-sm text-gray-400 py-8">
+    <p>&copy; 2024 Makeup Magic. All rights reserved.</p>
+  </div>
+</div>
+
     </div>
   );
 };
