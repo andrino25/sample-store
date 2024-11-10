@@ -24,7 +24,7 @@ const Home = () => {
           </p>
           <Link
             to="/products"
-            className="bg-white text-pink-600 py-2 px-6 rounded-lg text-xl"
+            className="bg-white text-pink-600 py-2 px-6 rounded-lg text-xl hover:bg-pink-500 hover:text-white"
           >
             Shop Now
           </Link>

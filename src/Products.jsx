@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";  // Import Toastify
+import "react-toastify/dist/ReactToastify.css";  // Import CSS for Toastify
 
 const products = [
   {
@@ -259,7 +261,15 @@ const Products = () => {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${selectedImage.name} added to cart`);
+    toast.success(`${selectedImage.name} added to cart`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   };
 
   return (
@@ -307,6 +317,7 @@ const Products = () => {
               >
                 Add to Cart
               </button>
+              <ToastContainer />
             </div>
           ))}
         </div>
