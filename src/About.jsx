@@ -23,7 +23,7 @@ const About = () => {
             playsInline
             controls
           >
-            <source src="src/assets/video.mp4" type="video/mp4" />
+            <source src="/video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
