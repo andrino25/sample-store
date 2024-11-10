@@ -6,9 +6,11 @@ import logo from './assets/logo.png';
 function Header() {
   return (
     <header>
-      <div className="logo-container">
+       <div className="logo-container">
+      <Link to="/" className="logo-link">
         <img src={logo} alt="Logo" className="logo" />
-      </div>
+      </Link>
+    </div>
       <nav>
         <ul className="nav-list">
           <li>
