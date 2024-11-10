@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -21,12 +22,12 @@ const Home = () => {
           <p className="text-lg sm:text-xl mb-6">
             Discover the best products for your perfect look.
           </p>
-          <a
-            href="/products"
+          <Link
+            to="/products"
             className="bg-white text-pink-600 py-2 px-6 rounded-lg text-xl"
           >
             Shop Now
-          </a>
+          </Link>
         </div>
       </section>
 
