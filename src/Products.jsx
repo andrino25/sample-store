@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";  // Import Toastify
 import "react-toastify/dist/ReactToastify.css";  // Import CSS for Toastify
+import { Link } from 'react-router-dom'; 
 
 const products = [
   {
@@ -287,14 +288,16 @@ const Products = () => {
         <div className="flex justify-center space-x-8">
           {products.map((product) => (
             <div key={product.id} className="bg-white max-w-sm p-6 rounded-lg shadow-md">
-              <div className="mb-4">
-                <img
-                  src={selectedImages[product.id].src}
-                  alt={selectedImages[product.id].alt}
-                  className="w-full h-64 object-cover object-center rounded-md"
-                />
-              </div>
-  
+              <Link to={`/productDetails/${product.id}`}>
+                <div className="mb-4">
+                  
+                  <img
+                    src={selectedImages[product.id].src}
+                    alt={selectedImages[product.id].alt}
+                    className="w-full h-64 object-cover object-center rounded-md"
+                  />
+                </div>
+              </Link>
               <h3 className="text-lg font-medium text-gray-800">{selectedImages[product.id].name}</h3>
               <p className="mt-1 text-lg font-semibold text-gray-900">${selectedImages[product.id].price}</p>
   
