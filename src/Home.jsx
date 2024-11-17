@@ -1,7 +1,17 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import prod1 from '@/assets/prod1.png';
+import prod2 from '@/assets/prod3.png';
+import prod3 from '@/assets/prod22.png';
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleProductClick = (productId) => {
+    navigate(`/productDetails/${productId}`);
+  };
+
   return (
     <div className="font-sans bg-white">
       {/* Hero Section with Video Background */}
@@ -17,7 +27,7 @@ const Home = () => {
         {/* Content on top of the Video */}
         <div className="relative z-10">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
-            Welcome to the World of Makeup
+            Welcome to Viora Cosmetics
           </h1>
           <p className="text-lg sm:text-xl mb-6">
             Discover the best products for your perfect look.
@@ -34,45 +44,54 @@ const Home = () => {
       {/* Featured Products Section */}
       <section id="shop" className="py-16 px-4 sm:px-8">
         <h2 className="text-3xl font-bold text-center mb-8">
-          Our Best-Selling Products
+          Our Products
         </h2>
         <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Product 1 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div 
+            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+            onClick={() => handleProductClick(1)}
+          >
             <img
               className="w-full h-48 object-cover"
-              src="https://artdeco.com/cdn/shop/collections/Kategoriebanner-Lippenstift.jpg?v=1686906417&width=1024"
-              alt="Lipstick"
+              src={prod1}
+              alt="Matte Lip Tint"
             />
             <div className="p-6">
-              <h3 className="text-xl font-semibold">Lipstick</h3>
-              <p className="text-gray-600">$29.99</p>
+              <h3 className="text-xl font-semibold">Matte Lip Tint</h3>
+              <p className="text-gray-600">₱200</p>
             </div>
           </div>
 
           {/* Product 2 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div 
+            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+            onClick={() => handleProductClick(2)}
+          >
             <img
               className="w-full h-48 object-cover"
-              src="https://i.ytimg.com/vi/XBPiq4WpK_E/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBaIvIx5fPxi14pZvP5bKF7zz1PkQ"
-              alt="Foundation"
+              src={prod3}
+              alt="Lip Tint"
             />
             <div className="p-6">
-              <h3 className="text-xl font-semibold">Foundation</h3>
-              <p className="text-gray-600">$39.99</p>
+              <h3 className="text-xl font-semibold">Lip Tint</h3>
+              <p className="text-gray-600">₱130</p>
             </div>
           </div>
 
           {/* Product 3 */}
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+          <div 
+            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+            onClick={() => handleProductClick(3)}
+          >
             <img
               className="w-full h-48 object-cover"
-              src="https://artdeco.com/cdn/shop/collections/Kategoriebanner-Mascara.jpg?v=1720441496&width=1024"
-              alt="Mascara"
+              src={prod2}
+              alt="Lip Gloss"
             />
             <div className="p-6">
-              <h3 className="text-xl font-semibold">Mascara</h3>
-              <p className="text-gray-600">$19.99</p>
+              <h3 className="text-xl font-semibold">Lip Gloss</h3>
+              <p className="text-gray-600">₱150</p>
             </div>
           </div>
         </div>

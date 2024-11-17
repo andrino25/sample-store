@@ -23,7 +23,7 @@ const About = () => {
             playsInline
             controls
           >
-            <source src="/video.mp4" type="video/mp4" />
+            <source src="/sample.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -47,7 +47,7 @@ const About = () => {
         <div className="w-full lg:w-7/12">
           <img
             className="w-full h-full rounded-xl shadow-lg"
-            src="https://scontent.xx.fbcdn.net/v/t1.15752-9/456991574_1989568564817058_4063411312545261057_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFZoHb3NDTPCkxScVgHwtQyp4uPNyEWyqKni483IRbKooJE7DE3ApsiHixAIpSiFOcJ7sBkVFD2_viWVBQLNbru&_nc_ohc=hCV4Rs3hm54Q7kNvgEW3xAT&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1QFHCdct4ieubt_zTvvnNRDmoWTn1X6V_E3Ef1QAi-2RKA&oe=675717C3"
+            src="https://ca-times.brightspotcdn.com/dims4/default/fdaa77f/2147483647/strip/true/crop/3000x2051+0+0/resize/1200x820!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F5c%2F94%2F6be072a140cba6d21278a005c540%2Fmmpr-y1-104c-l.jpg"
             alt="A group of People"
           />
         </div>
@@ -73,41 +73,41 @@ const About = () => {
       <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
         <img
           className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://scontent.xx.fbcdn.net/v/t1.15752-9/451445881_484055514617244_2690744594872706815_n.png?_nc_cat=107&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeGAXhmqa8u1_ZHt_1xaG9GRKlOfHIYrY2gqU58chitjaOZh1p66sOVfwLGa7Bj3iVt47MS1l3NfX1-7sVsQns6a&_nc_ohc=IOA8Ww4k5rIQ7kNvgFctIaG&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1QHojD-so8wjKW6sfXeYDAbR5n_eLDa1k8vujQRbyQ2Alg&oe=675727CB"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT62-8_sbNicUmE_26wCNGaUKSlwDDZnoOhUonFXgWSZnFp1mQf8zM6mVqzHBJ_eXLBPgo&usqp=CAU"
         />
-        <p className="text-xl font-semibold text-gray-800">Mae</p>
+        <p className="text-xl font-semibold text-gray-800">Black</p>
       </div>
       <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
         <img
           className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://scontent.fceb3-1.fna.fbcdn.net/v/t39.30808-6/432089697_433410805748931_266264513057446619_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGluVejZNuzhCLXY2hiDhsXHVe8RgcID4AdV7xGBwgPgDhJUWfOi5A7eePpSDnYkSLenCksHMsYco_rzX8H8r0V&_nc_ohc=5XAWNH8t9g4Q7kNvgFz5KOb&_nc_zt=23&_nc_ht=scontent.fceb3-1.fna&_nc_gid=ADDcEO37nVqrRmEZncGMY-4&oh=00_AYC_0X5J7a8gXELjpEpSVi7sfR1Q1mTwnwHdIcMlh1Jomg&oe=67356920"
+          src="https://townsquare.media/site/74/files/2017/06/pink-ranger.jpg?w=780&q=75"
           alt="Olivia featured Img"
         />
-        <p className="text-xl font-semibold text-gray-800">Faith</p>
+        <p className="text-xl font-semibold text-gray-800">Pink</p>
       </div>
       <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
         <img
           className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://scontent.xx.fbcdn.net/v/t1.15752-9/462565629_520098110869183_2375903291741446473_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFusrmfDoqZqRUNtQHau8VmNEFEhIMX7Wg0QUSEgxftaMxTltuBFYGP6sDDRWRl463w3aOEY3XItxYFvp9WgDPR&_nc_ohc=3TltFMRHnEgQ7kNvgF4kVjH&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1QGq6BuTzQrECT3jDdgZ-mCuLmfvPfH2is8ilZGvYCiD8g&oe=6757264C"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmshR2UpoYFSYKt3fGEHIWbVp0mfx5CWgWy147F_Clc_G8Qnn56mEr5aagblxZ1qz1tvo&usqp=CAU"
           alt="Liam featured Img"
         />
-        <p className="text-xl font-semibold text-gray-800">Espe</p>
+        <p className="text-xl font-semibold text-gray-800">Red</p>
       </div>
       <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
         <img
           className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://scontent.xx.fbcdn.net/v/t1.15752-9/462558994_1189589622119198_836307702456921517_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeFiLf9YWNYNJOSK3OY76DkEMXMUy3LL2usxcxTLcsva612EVkt-Cb-u1lQZdnQq_a2PZiKPn1T8YxeLxSUxsECD&_nc_ohc=TebzPTQ-GPAQ7kNvgHAmvoj&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1QGwB4AE2PwtQGzHO6ySmWWSnmobW1M26lhXHl-PyArveg&oe=67572A42"
+          src="https://people.com/thmb/1n1uKwpNTnZfVlkuCz6sD4h0Rd0=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/power-rangers-reunion-2023032295-eb36c6d8656a49a69518d99cddd8cbeb.jpg"
           alt="Elijah featured img"
         />
-        <p className="text-xl font-semibold text-gray-800">Mae(2)</p>
+        <p className="text-xl font-semibold text-gray-800">Yellow</p>
       </div>
       <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
         <img
           className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://scontent.xx.fbcdn.net/v/t1.15752-9/461261832_1181938243103381_1751628103127798548_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeE5ipgZcPG3SLY1CjLoixdwMMsD6RHLasEwywPpEctqwbiWP_5rSumjnU1CCm9_TQCtYm2QfSCGlBO9Jh9_dxEh&_nc_ohc=nqtoOmMAjFkQ7kNvgFXsrYA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&oh=03_Q7cD1QFe-EUjf6XsVwoExkGAV2lfjn7BmHqfuNL476KNQUqrog&oe=67571AA5"
+          src="https://i.ytimg.com/vi/IYAb1fdVkmU/maxresdefault.jpg"
           alt="Elijah featured img"
         />
-        <p className="text-xl font-semibold text-gray-800">Bimbs</p>
+        <p className="text-xl font-semibold text-gray-800">Blue</p>
       </div>
     </div>
   </div>

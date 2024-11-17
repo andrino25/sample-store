@@ -114,7 +114,7 @@ export default function Cart() {
                     <div className="ml-4 flex-1">
                       <div className="flex justify-between text-lg font-medium text-gray-900">
                         <h3>{product.name}</h3>
-                        <p>${(product.price * product.quantity).toFixed(2)}</p>
+                        <p>₱{(product.price * product.quantity).toFixed(2)}</p>
                       </div>
                       <div className="flex items-center mt-2 space-x-2">
                         <span className="text-sm text-gray-500">Qty:</span>
@@ -156,7 +156,7 @@ export default function Cart() {
         <div className="border-t border-gray-200 px-6 py-4">
           <div className="flex justify-between text-lg font-semibold text-gray-900">
             <p>Total</p>
-            <p>${total.toFixed(2)}</p>
+            <p>₱{total.toFixed(2)}</p>
           </div>
           <div className="mt-6 flex space-x-4">
             <button
