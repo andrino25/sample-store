@@ -122,14 +122,14 @@ const products = [
   },
 
   {
-    id: 2,
+    id: 3,
     name: "Lip Tint",
     images: [
       { 
         id: 1, 
         color: "aphrodite", 
         name: "Lip Tint - Aphrodite", 
-        price: 180, 
+        price: 130, 
         src: Aphrodite, 
         alt: "Lip Tint in Cherry shade" 
       },
@@ -137,7 +137,7 @@ const products = [
         id: 2, 
         color: "artemis", 
         name: "Lip Tint - Artemis", 
-        price: 180, 
+        price: 130, 
         src: Artemis, 
         alt: "Lip Tint in Peach shade" 
       },
@@ -145,7 +145,7 @@ const products = [
         id: 3, 
         color: "astraea", 
         name: "Lip Tint - Astraea", 
-        price: 180, 
+        price: 130, 
         src: Astraea, 
         alt: "Lip Tint in Pink shade" 
       },
@@ -153,7 +153,7 @@ const products = [
         id: 4, 
         color: "athena", 
         name: "Lip Tint - Athena", 
-        price: 180, 
+        price: 130, 
         src: Athena, 
         alt: "Lip Tint in Cherry shade" 
       },
@@ -161,7 +161,7 @@ const products = [
         id: 5, 
         color: "calypso", 
         name: "Lip Tint - Calypso", 
-        price: 180, 
+        price: 130, 
         src: Calypso, 
         alt: "Lip Tint in Peach shade" 
       },
@@ -169,7 +169,7 @@ const products = [
         id: 6, 
         color: "demeter", 
         name: "Lip Tint - Demeter", 
-        price: 180, 
+        price: 130, 
         src: Demeter, 
         alt: "Lip Tint in Pink shade" 
       },
@@ -177,14 +177,14 @@ const products = [
       id: 7, 
       color: "psyche", 
       name: "Lip Tint - Psyche", 
-      price: 180, 
+      price: 130, 
       src: Psyche, 
       alt: "Lip Tint in Pink shade" 
     }
     ],
   },
   {
-    id: 3,
+    id: 2,
     name: "Lip Gloss",
     images: [
       { 

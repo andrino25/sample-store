@@ -66,7 +66,7 @@ const Home = () => {
           {/* Product 2 */}
           <div 
             className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-            onClick={() => handleProductClick(2)}
+            onClick={() => handleProductClick(3)}
           >
             <img
               className="w-full h-48 object-cover"
@@ -82,7 +82,7 @@ const Home = () => {
           {/* Product 3 */}
           <div 
             className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-            onClick={() => handleProductClick(3)}
+            onClick={() => handleProductClick(2)}
           >
             <img
               className="w-full h-48 object-cover"
