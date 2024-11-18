@@ -125,14 +125,16 @@ const products = [
     id: 3,
     name: "Lip Tint",
     images: [
+
       { 
         id: 1, 
-        color: "aphrodite", 
-        name: "Lip Tint - Aphrodite", 
+        color: "astraea", 
+        name: "Lip Tint - Astraea", 
         price: 130, 
-        src: Aphrodite, 
-        alt: "Lip Tint in Cherry shade" 
+        src: Astraea, 
+        alt: "Lip Tint in Pink shade" 
       },
+
       { 
         id: 2, 
         color: "artemis", 
@@ -143,14 +145,6 @@ const products = [
       },
       { 
         id: 3, 
-        color: "astraea", 
-        name: "Lip Tint - Astraea", 
-        price: 130, 
-        src: Astraea, 
-        alt: "Lip Tint in Pink shade" 
-      },
-      { 
-        id: 4, 
         color: "athena", 
         name: "Lip Tint - Athena", 
         price: 130, 
@@ -158,7 +152,7 @@ const products = [
         alt: "Lip Tint in Cherry shade" 
       },
       { 
-        id: 5, 
+        id: 4, 
         color: "calypso", 
         name: "Lip Tint - Calypso", 
         price: 130, 
@@ -166,12 +160,20 @@ const products = [
         alt: "Lip Tint in Peach shade" 
       },
       { 
-        id: 6, 
+        id: 5, 
         color: "demeter", 
         name: "Lip Tint - Demeter", 
         price: 130, 
         src: Demeter, 
         alt: "Lip Tint in Pink shade" 
+      },
+      { 
+        id: 6, 
+        color: "aphrodite", 
+        name: "Lip Tint - Aphrodite", 
+        price: 130, 
+        src: Aphrodite, 
+        alt: "Lip Tint in Cherry shade" 
       },
       {
       id: 7, 
@@ -365,18 +367,6 @@ const ProductDetails = () => {
             <div className="price-section">
               <span className="price">₱{selectedImage.price}</span>
             </div>
-            <div className="color-options mt-4 flex gap-2">
-              {product.images.map((image) => (
-                <button
-                  key={image.id}
-                  onClick={() => changeImage(image)}
-                  className={`w-10 h-10 rounded-full border-2 ${
-                    selectedImage.id === image.id ? "border-pink-600" : "border-gray-300"
-                  } ${colorMap[image.color]} flex items-center justify-center`}
-                  aria-label={`Select ${image.color} color`}
-                ></button>
-              ))}
-            </div>
             <div className="mt-6">
               <label className="quantity-label">Quantity</label>
               <div className="quantity-section">
@@ -402,6 +392,18 @@ const ProductDetails = () => {
                   <span>+</span>
                 </button>
               </div>
+            </div>
+            <div className="color-options mt-4 flex gap-2">
+              {product.images.map((image) => (
+                <button
+                  key={image.id}
+                  onClick={() => changeImage(image)}
+                  className={`w-10 h-10 rounded-full border-2 ${
+                    selectedImage.id === image.id ? "border-pink-600" : "border-gray-300"
+                  } ${colorMap[image.color]} flex items-center justify-center`}
+                  aria-label={`Select ${image.color} color`}
+                ></button>
+              ))}
             </div>
             <button
               onClick={addToCart}

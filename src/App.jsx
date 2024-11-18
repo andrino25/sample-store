@@ -7,11 +7,27 @@ import About from './About';
 import Products from './Products';
 import Cart from './Cart'; // Import Cart component
 import ProductDetails from './ProductDetails';
+import logo from '@/assets/logo.png';
 
 function App() {
 
   useEffect(() => {
     document.title = "Viora Cosmetics";
+    
+    // Create a new link element
+    const newFavicon = document.createElement('link');
+    newFavicon.rel = 'icon';
+    newFavicon.type = 'image/png';  // Specify PNG type
+    newFavicon.href = logo;
+
+    // Remove existing favicon
+    const existingFavicon = document.querySelector('link[rel="icon"]');
+    if (existingFavicon) {
+      existingFavicon.remove();
+    }
+
+    // Add new favicon to head
+    document.head.appendChild(newFavicon);
   }, []); 
   
   return (

@@ -1,34 +1,102 @@
 import React from "react";
 
+import prod1 from '@/assets/prod1.png';
+import prod2 from '@/assets/prod3.png';
+import prod3 from '@/assets/prod2.png';
+import aboutPicture from '@/assets/pic.png';
+import about1 from '@/assets/about_pic1.png';
+import about2 from '@/assets/about_pic2.png';
+import about3 from '@/assets/about_pic3.png';
+
 const About = () => {
   return (
+    
     <div className="2xl:container 2xl:mx-auto lg:py-20 lg:px-24 md:py-16 md:px-8 py-12 px-6">
-      {/* Video Section */}
-      <div className="flex flex-col items-center mb-16">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">
-          Intro to Makeup Magic!
-        </h2>
-        <p className="text-lg text-gray-600 text-center mb-8">
-          Discover the secrets behind the art of makeup. Whether you're a
-          beginner or a pro, this video will take you through essential tips and
-          tricks to enhance your natural beauty. Dive into the world of colors,
-          textures, and techniques that make makeup so captivating!
-        </p>
-        <div className="w-full h-96 lg:h-[600px] mb-12 flex justify-center items-center overflow-hidden rounded-2xl shadow-2xl transition-transform duration-500 transform hover:scale-105">
-          <video
-            className="w-full h-full object-cover rounded-xl shadow-xl"
-            autoPlay
-            loop
-            muted
-            playsInline
-            controls
-          >
-            <source src="/sample.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+      {/* Product Information Section */}
+      <div className="py-16">
+        {/* Matte Lip Tint */}
+        <div className="flex flex-col lg:flex-row items-center gap-8 mb-16">
+          <div className="w-full lg:w-1/2">
+            <img
+              className="w-full h-[400px] object-cover rounded-xl shadow-lg"
+              src={prod1}
+              alt="Matte Lip Tint"
+            />
+          </div>
+          <div className="w-full lg:w-1/2 p-6">
+            <h3 className="text-3xl font-bold mb-4">Matte Lip Tint</h3>
+            <p className="text-gray-600 mb-6">
+              Matte perfection. Bold color. Viora's Matte Lip Tint offers an intense, smooth finish that glides on effortlessly and stays put all day.
+            </p>
+            <div className="space-y-3">
+              <h4 className="text-xl font-semibold mb-2">Key Features:</h4>
+              <ul className="list-disc list-inside space-y-2 text-gray-600">
+                <li>Bold, Matte Color: Provides intense, full-coverage color with a soft, velvety matte finish.</li>
+                <li>Long-Lasting Wear: Stays in place for hours without fading or transferring.</li>
+                <li>Lightweight Formula: Feels weightless and breathable on lips.</li>
+                <li>Transfer-Proof: Enjoy all-day confidence with no smudging.</li>
+                <li>Smooth, Even Application: Designed to glide on smoothly.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Lip Tint */}
+        <div className="flex flex-col lg:flex-row-reverse items-center gap-8 mb-16">
+          <div className="w-full lg:w-1/2">
+            <img
+              className="w-full h-[400px] object-cover rounded-xl shadow-lg"
+              src={prod3}
+              alt="Lip Tint"
+            />
+          </div>
+          <div className="w-full lg:w-1/2 p-6">
+            <h3 className="text-3xl font-bold mb-4">Lip Tint</h3>
+            <p className="text-gray-600 mb-6">
+              Natural color. Effortless glow. Viora's Lip Tint delivers a lightweight, buildable tint that enhances your lips with a subtle, long-lasting flush of color.
+            </p>
+            <div className="space-y-3">
+              <h4 className="text-xl font-semibold mb-2">Key Features:</h4>
+              <ul className="list-disc list-inside space-y-2 text-gray-600">
+                <li>Lightweight & Buildable: Offers a natural, sheer tint that can be layered.</li>
+                <li>Long-Lasting Hydration: Infused with nourishing ingredients.</li>
+                <li>Natural, Dewy Finish: Provides a fresh, radiant look.</li>
+                <li>Quick-Dry Formula: Perfect for on-the-go application.</li>
+                <li>Versatile Shades: Designed to complement all skin tones.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Lip Gloss */}
+        <div className="flex flex-col lg:flex-row items-center gap-8 mb-16">
+          <div className="w-full lg:w-1/2">
+            <img
+              className="w-full h-[400px] object-cover rounded-xl shadow-lg"
+              src={prod2}
+              alt="Lip Gloss"
+            />
+          </div>
+          <div className="w-full lg:w-1/2 p-6">
+            <h3 className="text-3xl font-bold mb-4">Lip Gloss</h3>
+            <p className="text-gray-600 mb-6">
+              Glossy shine. Luscious lips. Viora's Lip Gloss delivers a stunning, high-shine finish that hydrates and nourishes your lips with every swipe.
+            </p>
+            <div className="space-y-3">
+              <h4 className="text-xl font-semibold mb-2">Key Features:</h4>
+              <ul className="list-disc list-inside space-y-2 text-gray-600">
+                <li>High-Shine Finish: Provides a dazzling, glossy shine.</li>
+                <li>Hydrating & Nourishing: Enriched with moisturizing ingredients.</li>
+                <li>Non-Sticky Formula: Lightweight and comfortable wear.</li>
+                <li>Buildable Color: From sheer to intense coverage.</li>
+                <li>For All Skin Tones: Shades to complement every complexion.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 
+      
       {/* About Us Section */}
       <div className="flex flex-col lg:flex-row justify-between gap-12 mb-16">
         <div className="w-full lg:w-5/12 flex flex-col justify-center">
@@ -36,82 +104,57 @@ const About = () => {
             About Us
           </h1>
           <p className="text-lg text-gray-600">
-            It is a long-established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum. In the first place, we have granted to God,
-            and by this, our present charter confirmed for us and our heirs
-            forever that the English Church shall be free, and shall have her
-            rights entire, and her liberties inviolate.
+          Viora Cosmetics is a beauty brand dedicated to making self-expression accessible to all. We offer a vibrant range of high-quality, long-lasting lip products in shades that complement every skin tone—at prices that empower everyone to embrace their unique style. With a focus on inclusivity, empowerment, and affordability, our products are designed to help individuals of all backgrounds confidently express their personality.
+
           </p>
         </div>
         <div className="w-full lg:w-7/12">
           <img
             className="w-full h-full rounded-xl shadow-lg"
-            src="https://ca-times.brightspotcdn.com/dims4/default/fdaa77f/2147483647/strip/true/crop/3000x2051+0+0/resize/1200x820!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F5c%2F94%2F6be072a140cba6d21278a005c540%2Fmmpr-y1-104c-l.jpg"
+            src={aboutPicture}
             alt="A group of People"
           />
         </div>
       </div>
 
-      {/* Our Story Section */}
-<div className="flex flex-col lg:flex-row justify-between gap-12 pt-16 pb-16">
-  <div className="w-full lg:w-5/12 flex flex-col justify-center">
-    <h1 className="text-4xl font-extrabold leading-9 text-gray-800 pb-6">
-      Our Story
-    </h1>
-    <p className="text-lg text-gray-600">
-      It is a long-established fact that a reader will be distracted by
-      the readable content of a page when looking at its layout. The point
-      of using Lorem Ipsum. In the first place, we have granted to God,
-      and by this, our present charter confirmed for us and our heirs
-      forever that the English Church shall be free, and shall have her
-      rights entire, and her liberties inviolate.
-    </p>
-  </div>
-  <div className="w-full lg:w-7/12 lg:pt-8">
-    <div className="grid md:grid-cols-5 sm:grid-cols-2 grid-cols-1 gap-2 shadow-lg rounded-md">
-      <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
-        <img
-          className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT62-8_sbNicUmE_26wCNGaUKSlwDDZnoOhUonFXgWSZnFp1mQf8zM6mVqzHBJ_eXLBPgo&usqp=CAU"
-        />
-        <p className="text-xl font-semibold text-gray-800">Black</p>
+      {/* Image Gallery Section */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-bold text-center mb-8">Our Gallery</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Image 1 */}
+          <div className="relative group overflow-hidden rounded-xl shadow-lg">
+            <img
+              src={about1}  // Replace with your image path
+              alt="Gallery Image 1"
+              className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            </div>
+          </div>
+
+          {/* Image 2 */}
+          <div className="relative group overflow-hidden rounded-xl shadow-lg">
+            <img
+              src={about2}  // Replace with your image path
+              alt="Gallery Image 2"
+              className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            </div>
+          </div>
+
+          {/* Image 3 */}
+          <div className="relative group overflow-hidden rounded-xl shadow-lg">
+            <img
+              src={about3}  // Replace with your image path
+              alt="Gallery Image 3"
+              className="w-full h-[400px] object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
-        <img
-          className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://townsquare.media/site/74/files/2017/06/pink-ranger.jpg?w=780&q=75"
-          alt="Olivia featured Img"
-        />
-        <p className="text-xl font-semibold text-gray-800">Pink</p>
-      </div>
-      <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
-        <img
-          className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmshR2UpoYFSYKt3fGEHIWbVp0mfx5CWgWy147F_Clc_G8Qnn56mEr5aagblxZ1qz1tvo&usqp=CAU"
-          alt="Liam featured Img"
-        />
-        <p className="text-xl font-semibold text-gray-800">Red</p>
-      </div>
-      <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
-        <img
-          className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://people.com/thmb/1n1uKwpNTnZfVlkuCz6sD4h0Rd0=/4000x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/power-rangers-reunion-2023032295-eb36c6d8656a49a69518d99cddd8cbeb.jpg"
-          alt="Elijah featured img"
-        />
-        <p className="text-xl font-semibold text-gray-800">Yellow</p>
-      </div>
-      <div className="p-6 flex justify-center flex-col items-center hover:scale-105 transition-transform duration-500">
-        <img
-          className="rounded-lg mb-4 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 object-cover"
-          src="https://i.ytimg.com/vi/IYAb1fdVkmU/maxresdefault.jpg"
-          alt="Elijah featured img"
-        />
-        <p className="text-xl font-semibold text-gray-800">Blue</p>
-      </div>
-    </div>
-  </div>
-</div>
 
       {/* Social Media Section with Footer */}
       <div className="bg-gray-900 text-white py-16 px-4 sm:px-6 lg:px-8">
@@ -128,10 +171,7 @@ const About = () => {
         { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png", alt: "YouTube", href: "https://youtube.com" },
         { src: "https://img.freepik.com/premium-vector/tiktok-logo-sticker_941327-31.jpg?semt=ais_hybrid", alt: "TikTok", href: "https://tiktok.com" },
         { src: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png", alt: "Instagram", href: "https://instagram.com" },
-        { src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Pinterest.svg/1200px-Pinterest.svg.png", alt: "Pinterest", href: "https://pinterest.com" },
         { src: "https://cdn.worldvectorlogo.com/logos/twitter-logo-2.svg", alt: "Twitter", href: "https://twitter.com" },
-        { src: "https://www.svgrepo.com/show/303130/snapchat-logo.svg", alt: "Snapchat", href: "https://snapchat.com" },
-        { src: "https://www.logo.wine/a/logo/Telegram_(software)/Telegram_(software)-Logo.wine.svg", alt: "Telegram", href: "https://telegram.org" }
       ].map((social, index) => (
         <a
           key={index}

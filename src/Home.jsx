@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import prod1 from '@/assets/prod1.png';
 import prod2 from '@/assets/prod3.png';
-import prod3 from '@/assets/prod22.png';
+import prod3 from '@/assets/prod2.png';
+import aboutPicture from '@/assets/about_pic.png';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,93 +15,100 @@ const Home = () => {
 
   return (
     <div className="font-sans bg-white">
-      {/* Hero Section with Video Background */}
-      <section className="relative bg-gradient-to-r from-pink-500 to-purple-600 text-white py-16 text-center">
-        {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full z-0">
-          <video className="w-full h-full object-cover" autoPlay loop muted>
-            <source src="/intro.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+      {/* Hero Section with improved height and overlay */}
+      <section className="relative h-screen bg-gradient-to-r from-pink-500 to-purple-600 text-white">
+        {/* Enhanced Video Background with overlay */}
+        <div className="absolute inset-0 w-full h-full">
+          <div className="absolute inset-0 bg-black/40 z-10"></div>
+          <img 
+            className="w-full h-full object-cover object-center" 
+            src={aboutPicture}
+            alt="Hero Background"
+          />
         </div>
 
-        {/* Content on top of the Video */}
-        <div className="relative z-10">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4">
+        {/* Centered content with improved spacing */}
+        <div className="relative z-20 h-full flex flex-col items-center justify-center px-4">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 text-center">
             Welcome to Viora Cosmetics
           </h1>
-          <p className="text-lg sm:text-xl mb-6">
+          <p className="text-xl sm:text-2xl mb-8 max-w-2xl text-center">
             Discover the best products for your perfect look.
           </p>
           <Link
             to="/products"
-            className="bg-white text-pink-600 py-2 px-6 rounded-lg text-xl hover:bg-pink-500 hover:text-white"
+            className="bg-white text-pink-600 py-3 px-8 rounded-full text-xl font-semibold hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Shop Now
           </Link>
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section id="shop" className="py-16 px-4 sm:px-8">
-        <h2 className="text-3xl font-bold text-center mb-8">
+      {/* Enhanced Products Section */}
+      <section id="shop" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold text-center mb-12">
           Our Products
         </h2>
-        <div className="grid sm:grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Product 1 */}
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {/* Product Cards with improved styling */}
           <div 
-            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+            className="group bg-white rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             onClick={() => handleProductClick(1)}
           >
-            <img
-              className="w-full h-48 object-cover"
-              src={prod1}
-              alt="Matte Lip Tint"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold">Matte Lip Tint</h3>
-              <p className="text-gray-600">₱200</p>
+            <div className="aspect-square overflow-hidden">
+              <img
+                className="w-full h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-110"
+                src={prod1}
+                alt="Matte Lip Tint"
+              />
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-semibold mb-2">Matte Lip Tint</h3>
+              <p className="text-pink-600 text-xl font-bold">₱200</p>
             </div>
           </div>
 
-          {/* Product 2 */}
+          {/* Repeat the same structure for Product 2 and 3 */}
           <div 
-            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+            className="group bg-white rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             onClick={() => handleProductClick(3)}
           >
-            <img
-              className="w-full h-48 object-cover"
-              src={prod3}
-              alt="Lip Tint"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold">Lip Tint</h3>
-              <p className="text-gray-600">₱130</p>
+            <div className="aspect-square overflow-hidden">
+              <img
+                className="w-full h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-110"
+                src={prod3}
+                alt="Lip Tint"
+              />
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-semibold mb-2">Lip Tint</h3>
+              <p className="text-pink-600 text-xl font-bold">₱130</p>
             </div>
           </div>
 
-          {/* Product 3 */}
           <div 
-            className="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+            className="group bg-white rounded-2xl overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             onClick={() => handleProductClick(2)}
           >
-            <img
-              className="w-full h-48 object-cover"
-              src={prod2}
-              alt="Lip Gloss"
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold">Lip Gloss</h3>
-              <p className="text-gray-600">₱150</p>
+            <div className="aspect-square overflow-hidden">
+              <img
+                className="w-full h-full object-cover object-center transform transition-transform duration-300 group-hover:scale-110"
+                src={prod2}
+                alt="Lip Gloss"
+              />
+            </div>
+            <div className="p-8">
+              <h3 className="text-2xl font-semibold mb-2">Lip Gloss</h3>
+              <p className="text-pink-600 text-xl font-bold">₱150</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-pink-500 text-white py-6">
+      {/* Enhanced Footer */}
+      <footer className="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-8">
         <div className="text-center">
-          <p>&copy; 2024 Makeup Store. All rights reserved.</p>
+          <p className="text-lg">&copy; 2024 Makeup Store. All rights reserved.</p>
         </div>
       </footer>
     </div>
