@@ -1,5 +1,5 @@
 // App.js
-import React from 'react';
+import React, { useEffect } from 'react'; // Import useEffect
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
@@ -9,6 +9,11 @@ import Cart from './Cart'; // Import Cart component
 import ProductDetails from './ProductDetails';
 
 function App() {
+
+  useEffect(() => {
+    document.title = "Viora Cosmetics";
+  }, []); 
+  
   return (
     <Router>
       <Header />
