@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDetails.css';
 import { toast, ToastContainer } from "react-toastify";
@@ -307,34 +307,74 @@ const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
   const [quantity, setQuantity] = useState(1);
 
-  const changeImage = (image) => {
+  const [selectedProduct, setSelectedProduct] = useState(product);
+  const changeImage = (image, product) => {
     setSelectedImage(image);
+    setSelectedProduct(product);
   };
 
   const handleQuantityChange = (value) => {
-    setQuantity(prevQuantity => Math.max(1, prevQuantity + value));
+    setQuantity(prev => {
+      const newValue = prev + value;
+      if (newValue < 1) return 1;
+      if (newValue > 99) return 99;
+      return newValue;
+    });
   };
 
   const addToCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItem = cart.find((item) => item.id === selectedImage.id);
-
-    if (existingItem) {
-      existingItem.quantity += quantity;
-    } else {
-      cart.push({ ...selectedImage, quantity });
+    if (!selectedImage || !selectedProduct) {
+      toast.error("Please select a product and color before adding to the cart.");
+      return;
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    toast.success(`${selectedImage.name} added to cart`, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      draggable: true,
-      progress: undefined,
-    });
+    try {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const uniqueId = `${selectedProduct.id}-${selectedImage.id}`;
+      
+      const existingItemIndex = cart.findIndex(item => item.uniqueId === uniqueId);
+      
+      if (existingItemIndex !== -1) {
+        const updatedCart = [...cart];
+        const newQuantity = updatedCart[existingItemIndex].quantity + quantity;
+        
+        if (newQuantity > 99) {
+          toast.warning("Maximum quantity limit reached");
+          return;
+        }
+        
+        updatedCart[existingItemIndex].quantity = newQuantity;
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+      } else {
+        const newItem = {
+          ...selectedImage,
+          quantity,
+          uniqueId,
+          productId: selectedProduct.id,
+          colorName: selectedImage.color
+        };
+        
+        localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
+      }
+
+      toast.success(`${selectedImage.name} added to cart`, {
+        position: "top-center",
+        autoClose: 3000,
+      });
+
+      setQuantity(1);
+      
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast.error("Failed to add item to cart. Please try again.");
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      // Any cleanup needed
+    };
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -355,7 +395,7 @@ const ProductDetails = () => {
                   src={image.src}
                   alt={image.alt}
                   className={`thumbnail ${selectedImage.id === image.id ? 'opacity-100' : ''}`}
-                  onClick={() => changeImage(image)}
+                  onClick={() => changeImage(image, product)} // Pass the product explicitly
                 />
               ))}
             </div>
@@ -394,23 +434,23 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="color-options mt-4 flex gap-2">
-              {product.images.map((image) => (
-                <button
-                  key={image.id}
-                  onClick={() => changeImage(image)}
-                  className={`w-10 h-10 rounded-full border-2 ${
-                    selectedImage.id === image.id ? "border-pink-600" : "border-gray-300"
-                  } ${colorMap[image.color]} flex items-center justify-center`}
-                  aria-label={`Select ${image.color} color`}
-                ></button>
-              ))}
-            </div>
-            <button
-              onClick={addToCart}
-              className="mt-6 w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600"
-            >
-              Add to Cart
-            </button>
+                {product.images.map((image) => (
+                  <button
+                    key={image.id}
+                    onClick={() => changeImage(image, product)}
+                    className={`w-10 h-10 rounded-full border-2 ${
+                      selectedImage?.id === image.id ? "border-pink-600" : "border-gray-300"
+                    } ${colorMap[image.color]} flex items-center justify-center`}
+                    aria-label={`Select ${image.color} color`}
+                  ></button>
+                ))}
+              </div>
+              <button
+                onClick={addToCart}
+                className="mt-6 w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600"
+              >
+                Add to Cart
+              </button>
             <ToastContainer />
           </div>
         </div>

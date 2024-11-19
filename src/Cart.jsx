@@ -18,29 +18,22 @@ export default function Cart() {
     setTotal(totalPrice);
   };
 
-  const handleRemove = (productId) => {
-    const updatedCart = cart.filter((item) => item.id !== productId);
-    setCart(updatedCart);
+  const handleRemove = (uniqueId) => {
+    const itemToRemove = cart.find((item) => item.uniqueId === uniqueId);
+    setCart(prevCart => prevCart.filter((item) => item.uniqueId !== uniqueId));
+    
+    const updatedCart = cart.filter((item) => item.uniqueId !== uniqueId);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     calculateTotal(updatedCart);
 
-    // Find the product that was removed
-    const removedItem = cart.find((item) => item.id === productId);
-    if (removedItem) {
-      toast.success(`${removedItem.name} removed from cart`, {
-        position: "top-center", // Position the toast at the top center
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if (itemToRemove) {
+      toast.success(`${itemToRemove.name} removed from cart`);
     }
   };
 
-  const handleUpdateQuantity = (productId, quantity) => {
+  const handleUpdateQuantity = (uniqueId, quantity) => {
     const updatedCart = cart.map((item) =>
-      item.id === productId ? { ...item, quantity } : item
+      item.uniqueId === uniqueId ? { ...item, quantity } : item
     );
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -63,35 +56,26 @@ export default function Cart() {
   };
   
 
-  const handleSelectItem = (productId) => {
+  const handleSelectItem = (uniqueId) => {
     setSelectedItems((prev) => ({
       ...prev,
-      [productId]: !prev[productId],
+      [uniqueId]: !prev[uniqueId],
     }));
   };
 
   const handleCheckout = () => {
-    const checkedOutItems = cart.filter((item) => selectedItems[item.id]);
-    const updatedCart = cart.filter((item) => !selectedItems[item.id]);
-
-    // Update cart and localStorage
-    setCart(updatedCart);
+    const checkedOutItems = cart.filter((item) => selectedItems[item.uniqueId]);
+    setCart(prevCart => prevCart.filter((item) => !selectedItems[item.uniqueId]));
+    
+    setSelectedItems({});
+    
+    const updatedCart = cart.filter((item) => !selectedItems[item.uniqueId]);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-    // Show toast for each checked-out item
-    checkedOutItems.forEach((item) => {
-      toast.success(`${item.name} checked out successfully`, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-        progress: undefined,
-      });
-    });
-
-    // Recalculate total
     calculateTotal(updatedCart);
+
+    checkedOutItems.forEach((item) => {
+      toast.success(`${item.name} checked out successfully`);
+    });
   };
 
   return (
@@ -103,7 +87,7 @@ export default function Cart() {
             <ul role="list" className="space-y-6">
               {cart.length > 0 ? (
                 cart.map((product) => (
-                  <li key={product.id} className="flex items-center py-4 bg-gray-50 rounded-lg shadow-sm">
+                  <li key={product.uniqueId} className="flex items-center py-4 bg-gray-50 rounded-lg shadow-sm">
                     <div className="h-24 w-24 overflow-hidden rounded-md border border-gray-200">
                       <img
                         src={product.src}
@@ -122,7 +106,7 @@ export default function Cart() {
                           type="number"
                           value={product.quantity}
                           onChange={(e) =>
-                            handleUpdateQuantity(product.id, Number(e.target.value))
+                            handleUpdateQuantity(product.uniqueId, Number(e.target.value))
                           }
                           min="1"
                           className="w-16 p-1 border rounded text-center"
@@ -131,14 +115,14 @@ export default function Cart() {
                       <div className="flex items-center mt-2">
                         <input
                           type="checkbox"
-                          checked={selectedItems[product.id] || false}
-                          onChange={() => handleSelectItem(product.id)}
+                          checked={selectedItems[product.uniqueId] || false}
+                          onChange={() => handleSelectItem(product.uniqueId)}
                           className="mr-2"
                         />
                         <span className="text-sm text-gray-500">Select for checkout</span>
                       </div>
                       <button
-                        onClick={() => handleRemove(product.id)}
+                        onClick={() => handleRemove(product.uniqueId)}
                         className="mt-2 text-sm text-red-500 hover:underline"
                       >
                         Remove
