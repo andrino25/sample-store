@@ -1,10 +1,12 @@
 .main-image {
-    width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-  }
+  width: 80%;  /* Reduce from 100% if that was the original value */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 0 auto;  /* Center the image */
+  display: block;  /* Helps with centering */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
   
   .thumbnail-container {
     display: flex;
@@ -127,5 +129,9 @@
   
   .add-to-cart:hover {
     background-color: #4c51bf;
+  }
+  
+  .text-pink-600 {
+    transition: color 0.2s ease-in-out;
   }
   

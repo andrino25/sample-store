@@ -26,23 +26,20 @@ const Home = () => {
             alt="Hero Background"
           />
         </div>
-
-        {/* Centered content with improved spacing */}
-        <div className="relative z-20 h-full flex flex-col items-center justify-center px-4">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-6 text-center">
-            Welcome to Viora Cosmetics
-          </h1>
-          <p className="text-xl sm:text-2xl mb-8 max-w-2xl text-center">
-            Discover the best products for your perfect look.
-          </p>
-          <Link
-            to="/products"
-            className="bg-white text-pink-600 py-3 px-8 rounded-full text-xl font-semibold hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
-          >
-            Shop Now
-          </Link>
-        </div>
       </section>
+
+      {/* Centered content with improved spacing - Moved below section */}
+      <div className="relative z-20 -mt-72 mb-24 flex flex-col items-center justify-center px-4">
+        <p className="text-xl sm:text-2xl mb-8 max-w-2xl text-center text-white">
+          Discover the best products for your perfect look.
+        </p>
+        <Link
+          to="/products"
+          className="bg-white text-pink-600 py-3 px-8 rounded-full text-xl font-semibold hover:bg-pink-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+        >
+          Shop Now
+        </Link>
+      </div>
 
       {/* Enhanced Products Section */}
       <section id="shop" className="py-24 px-4 sm:px-8 max-w-7xl mx-auto">

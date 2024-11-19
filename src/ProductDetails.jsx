@@ -376,38 +376,131 @@ const ProductDetails = () => {
     };
   }, []);
 
+  const productDescriptions = {
+    "Lip Gloss": {
+      description: "Glossy shine. Luscious lips. Viora's Lip Gloss delivers a stunning, high-shine finish that hydrates and nourishes your lips with every swipe. This non-sticky formula adds a touch of radiant gloss while enhancing your natural lip color for a fuller, plumper appearance.",
+      features: [
+        "High-Shine Finish: Provides a dazzling, glossy shine that catches the light for a fuller, more luscious look.",
+        "Hydrating & Nourishing: Enriched with moisturizing ingredients to keep lips soft, smooth, and hydrated all day.",
+        "Non-Sticky Formula: Lightweight and comfortable, with no sticky or greasy feel.",
+        "Buildable Color: Apply a single layer for a sheer finish or build up for more intense color and shine.",
+        "For All Skin Tones: Available in shades that complement every complexion, perfect for day or night."
+      ]
+    },
+    "Lip Tint": {
+      description: "Natural color. Effortless glow. Viora's Lip Tint delivers a lightweight, buildable tint that enhances your lips with a subtle, long-lasting flush of color. This innovative formula provides a fresh, hydrated look while defining your lips with a soft, dewy finish.",
+      features: [
+        "Lightweight & Buildable: Offers a natural, sheer tint that can be layered for a deeper, more intense color.",
+        "Long-Lasting Hydration: Infused with nourishing ingredients to keep lips soft, moisturized, and smooth throughout the day.",
+        "Natural, Dewy Finish: Provides a fresh, radiant look with a soft sheen that enhances your natural lip color.",
+        "Quick-Dry Formula: Dries quickly without the tacky feel, making it perfect for on-the-go application.",
+        "Versatile Shades: Designed to complement all skin tones for an effortlessly beautiful look."
+      ]
+    },
+    "Matte Lip Tint": {
+      description: "Matte perfection. Bold color. Viora's Matte Lip Tint offers an intense, smooth finish that glides on effortlessly and stays put all day. This breakthrough formula delivers rich, matte color with a weightless feel, leaving your lips looking perfectly defined and comfortable without the dryness.",
+      features: [
+        "Bold, Matte Color: Provides intense, full-coverage color with a soft, velvety matte finish.",
+        "Long-Lasting Wear: Stays in place for hours without fading or transferring, perfect for all-day wear.",
+        "Lightweight Formula: Feels weightless and breathable on lips, ensuring comfort without cracking or drying.",
+        "Transfer-Proof: Enjoy all-day confidence with no smudging or budging.",
+        "Smooth, Even Application: Designed to glide on smoothly, providing a flawless, even layer of color."
+      ]
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-wrap -mx-4">
-          {/* Product Images */}
+          {/* Left Column - Images */}
           <div className="w-full md:w-1/2 px-4 mb-8">
-            <img
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              className="main-image"
-              id="mainImage"
-            />
-            <div className="thumbnail-container mt-4">
-              {product.images.map((image) => (
-                <img
-                  key={image.id}
-                  src={image.src}
-                  alt={image.alt}
-                  className={`thumbnail ${selectedImage.id === image.id ? 'opacity-100' : ''}`}
-                  onClick={() => changeImage(image, product)} // Pass the product explicitly
-                />
-              ))}
+            <div className="flex flex-col h-full">
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                className="w-4/5 mx-auto h-auto object-cover rounded-lg shadow-sm"
+                id="mainImage"
+              />
+              <div className="thumbnail-container mt-4 w-4/5 mx-auto">
+                {product.images.map((image) => (
+                  <img
+                    key={image.id}
+                    src={image.src}
+                    alt={image.alt}
+                    className={`thumbnail ${selectedImage.id === image.id ? 'opacity-100' : 'opacity-60'}`}
+                    onClick={() => changeImage(image, product)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Product Details */}
-          <div className="w-full md:w-1/2 px-4">
-            <h2 className="title">{selectedImage.name}</h2>
-            <div className="price-section">
-              <span className="price">₱{selectedImage.price}</span>
+          {/* Right Column - Product Details */}
+          <div className="w-full md:w-1/2 px-4 flex flex-col h-full">
+            {/* Title and Price */}
+            <div className="mb-6">
+              <h2 className="title">{selectedImage.name.split('-')[0].trim()}</h2>
+              <div className="price-section">
+                <span className="price">₱{selectedImage.price}</span>
+              </div>
             </div>
-            <div className="mt-6">
+
+            
+            {/* Shade Guide */}
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                Shade Guide
+              </h3>
+              
+              {/* Dynamic Shade Name Display */}
+              <div className="mb-4">
+                <span className="text-gray-600 font-medium">
+                  <span className="text-pink-600 font-semibold">
+                    {selectedImage.name.split('-')[1].trim()}
+                  </span>
+                </span>
+              </div>
+
+              <div className="color-options flex flex-wrap gap-2">
+                {product.images.map((image) => (
+                  <button
+                    key={image.id}
+                    onClick={() => changeImage(image, product)}
+                    className={`w-10 h-10 rounded-full border-2 ${
+                      selectedImage?.id === image.id ? "border-pink-600" : "border-gray-300"
+                    } ${colorMap[image.color]} transition-all duration-200 hover:scale-110`}
+                    aria-label={`Select ${image.name.split('-')[1].trim()} shade`}
+                  />
+                ))}
+              </div>
+            </div>
+
+
+            {/* Product Description */}
+            <div className="mb-6">
+              <p className="text-gray-600 leading-relaxed">
+                {productDescriptions[product.name].description}
+              </p>
+            </div>
+
+            {/* Key Features */}
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                Key Features
+              </h3>
+              <ul className="space-y-3">
+                {productDescriptions[product.name].features.map((feature, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-pink-500 mr-2">•</span>
+                    <span className="text-gray-600">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+             {/* Quantity Section */}
+             <div className="mb-6">
               <label className="quantity-label">Quantity</label>
               <div className="quantity-section">
                 <button
@@ -433,24 +526,16 @@ const ProductDetails = () => {
                 </button>
               </div>
             </div>
-            <div className="color-options mt-4 flex gap-2">
-                {product.images.map((image) => (
-                  <button
-                    key={image.id}
-                    onClick={() => changeImage(image, product)}
-                    className={`w-10 h-10 rounded-full border-2 ${
-                      selectedImage?.id === image.id ? "border-pink-600" : "border-gray-300"
-                    } ${colorMap[image.color]} flex items-center justify-center`}
-                    aria-label={`Select ${image.color} color`}
-                  ></button>
-                ))}
-              </div>
+
+            {/* Add to Cart - Aligned with scrollable images */}
+            <div className="mt-auto w-4/5 mx-auto">
               <button
                 onClick={addToCart}
-                className="mt-6 w-full bg-pink-500 text-white py-2 rounded-md hover:bg-pink-600"
+                className="w-full bg-pink-500 text-white py-3 rounded-md hover:bg-pink-600 transition-colors"
               >
                 Add to Cart
               </button>
+            </div>
             <ToastContainer />
           </div>
         </div>
