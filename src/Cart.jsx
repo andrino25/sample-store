@@ -123,7 +123,7 @@ export default function Cart() {
                 <input
                   type="text"
                   id="address"
-                  placeholder="Search for your address"
+                  placeholder="Enter your address"
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
                   required
                 >
@@ -154,7 +154,7 @@ export default function Cart() {
               <label class="payment-option block p-3 border border-gray-200 rounded-lg hover:border-pink-500 cursor-pointer">
                 <input type="radio" name="payment" value="gcash" class="hidden" onchange="handlePaymentChange(this)">
                 <div class="flex items-center">
-                  <img src="https://cdn.iconscout.com/icon/free/png-256/free-gcash-4236090-3513076.png" class="w-8 h-8 mr-3">
+                  <img src="https://images.seeklogo.com/logo-png/52/1/gcash-logo-png_seeklogo-522261.png" class="w-8 h-8 mr-3">
                   <div>
                     <div class="font-medium">GCash</div>
                     <div class="text-sm text-gray-500">Pay with GCash E-wallet</div>

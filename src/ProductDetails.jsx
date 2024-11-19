@@ -479,7 +479,7 @@ const ProductDetails = () => {
 
             {/* Product Description */}
             <div className="mb-6">
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 leading-relaxed text-justify">
                 {productDescriptions[product.name].description}
               </p>
             </div>
@@ -493,7 +493,7 @@ const ProductDetails = () => {
                 {productDescriptions[product.name].features.map((feature, index) => (
                   <li key={index} className="flex items-start">
                     <span className="text-pink-500 mr-2">•</span>
-                    <span className="text-gray-600">{feature}</span>
+                    <span className="text-gray-600 text-justify">{feature}</span>
                   </li>
                 ))}
               </ul>
