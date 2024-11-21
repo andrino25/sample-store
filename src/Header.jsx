@@ -23,6 +23,9 @@ function Header() {
             <Link to="/products" className="nav-link">Products</Link>
           </li>
           <li>
+            <Link to="/contact" className="nav-link">Contact Us</Link>
+          </li>
+          <li>
             <Link to="/cart" className="nav-link">Cart</Link>
           </li>
         </ul>
