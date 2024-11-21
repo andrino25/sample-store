@@ -139,6 +139,14 @@ const FAQs = () => {
     {
       question: "How long do your lip products last?",
       answer: "Our lip products typically last 6-8 hours with normal wear. The Matte Lip Tint offers the longest wear time of up to 12 hours."
+    },
+    {
+      question: "How can I place an order?",
+      answer: "You can place an order directly through our website. Simply browse our products, add them to your cart, and proceed to checkout."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept various payment methods including credit/debit cards, e-wallets (like GCash and PayMaya), and cash on delivery (COD) for your convenience."
     }
   ];
 
