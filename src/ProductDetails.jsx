@@ -4,6 +4,7 @@ import './ProductDetails.css';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+//matte liptint insertion
 import matteLipTintCherry from '@/assets/MatteLipTint/Cherry.png';
 import matteLipTintJane from '@/assets/MatteLipTint/Jane.png';
 import matteLipTintJanelle from '@/assets/MatteLipTint/Jannelle.png';
@@ -15,6 +16,7 @@ import matteLipTintMeberlene from '@/assets/MatteLipTint/Meberlene.png';
 import matteLipTintNiña from '@/assets/MatteLipTint/Niña.png';
 import matteLipTintVaughn from '@/assets/MatteLipTint/Vaughn.png';
 
+//lip tint insertion
 import Aphrodite from '@/assets/LipTint/Aphrodite.png';
 import Artemis from '@/assets/LipTint/Artemis.png';
 import Astraea from '@/assets/LipTint/Astraea.png';
@@ -23,6 +25,7 @@ import Calypso from '@/assets/LipTint/Calypso.png';
 import Demeter from '@/assets/LipTint/Demeter.png';
 import Psyche from '@/assets/LipTint/Psyche.png';
 
+//gloss insertion
 import Clueless from '@/assets/LipGloss/Clueless.png';
 import Euphoria from '@/assets/LipGloss/Euphoria.png';
 import FaerieSoiree from '@/assets/LipGloss/FaerieSoiree.png';
@@ -415,22 +418,56 @@ const ProductDetails = () => {
         <div className="flex flex-wrap -mx-4">
           {/* Left Column - Images */}
           <div className="w-full md:w-1/2 px-4 mb-8">
-            <div className="flex flex-col h-full">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="w-4/5 mx-auto h-auto object-cover rounded-lg shadow-sm"
-                id="mainImage"
-              />
-              <div className="thumbnail-container mt-4 w-4/5 mx-auto">
+            <div className="flex flex-col h-full space-y-6">
+              {/* Main Image Container */}
+              <div className="flex justify-center">
+                <div className="w-4/5 relative bg-transparent rounded-xl p-6 transition-transform">
+                  <div className="aspect-square overflow-hidden rounded-lg">
+                    <img
+                      src={selectedImage.src}
+                      alt={selectedImage.alt}
+                      className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300"
+                      id="mainImage"
+                    />
+                  </div>
+                </div>
+              </div>
+            
+
+              {/* Thumbnails */}
+              <div className="flex justify-center gap-3 w-4/5 mx-auto overflow-x-auto py-4 px-2">
                 {product.images.map((image) => (
-                  <img
+                  <div
                     key={image.id}
-                    src={image.src}
-                    alt={image.alt}
-                    className={`thumbnail ${selectedImage.id === image.id ? 'opacity-100' : 'opacity-60'}`}
                     onClick={() => changeImage(image, product)}
-                  />
+                    className={`
+                      cursor-pointer 
+                      flex-shrink-0 
+                      w-16 h-16 
+                      rounded-lg 
+                      overflow-hidden 
+                      transition-all 
+                      duration-200
+                      ${
+                        selectedImage.id === image.id 
+                          ? 'ring-2 ring-pink-500 ring-offset-2 shadow-lg transform scale-105' 
+                          : 'hover:ring-2 hover:ring-pink-300 hover:ring-offset-1'
+                      }
+                    `}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className={`
+                        w-full 
+                        h-full 
+                        object-cover 
+                        transition-opacity 
+                        duration-200
+                        ${selectedImage.id === image.id ? 'opacity-100' : 'opacity-75 hover:opacity-100'}
+                      `}
+                    />
+                  </div>
                 ))}
               </div>
             </div>

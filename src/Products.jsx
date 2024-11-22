@@ -6,6 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import prod1 from '@/assets/prod1.png';
 import prod2 from '@/assets/prod3.png';
 import prod3 from '@/assets/prod2.png';
+//cover page insertion
+import coverPage from '@/assets/LipTint/coverpage.png';
 
 const products = [
   {
@@ -19,7 +21,7 @@ const products = [
     id: 3,
     name: "Lip Tint",
     price: 130,
-    src: prod3,
+    src: coverPage,
     alt: "Lip Tint Product Image"
   },
   {
