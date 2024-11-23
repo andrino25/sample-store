@@ -16,7 +16,7 @@ const About = () => {
           <h1 className="text-4xl font-extrabold leading-9 text-gray-800 pb-6">
             About Us
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 text-justify">
           Viora Cosmetics is a beauty brand dedicated to making self-expression accessible to all. We offer a vibrant range of high-quality, long-lasting lip products in shades that complement every skin tone—at prices that empower everyone to embrace their unique style. With a focus on inclusivity, empowerment, and affordability, our products are designed to help individuals of all backgrounds confidently express their personality.
 
           </p>
