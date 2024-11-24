@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import icon from '@/assets/bot-icon.gif';
 import personIcon from '@/assets/person-icon.png';
 
@@ -172,6 +172,17 @@ const CustomerSupport = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const chatContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
 
   // Send initial greeting when component mounts
   useEffect(() => {
@@ -299,7 +310,10 @@ const CustomerSupport = () => {
         </div>
 
         {/* Chat Area */}
-        <div className="h-[400px] overflow-y-auto border-t border-pink-300 p-6 bg-gradient-to-b from-pink-50 to-white">
+        <div 
+          ref={chatContainerRef}
+          className="h-[400px] overflow-y-auto border-t border-pink-300 p-6 bg-gradient-to-b from-pink-50 to-white scroll-smooth"
+        >
           {messages.map((msg, index) => (
             <div
               key={index}
