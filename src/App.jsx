@@ -9,6 +9,7 @@ import Cart from './Cart'; // Import Cart component
 import ProductDetails from './ProductDetails';
 import logo from '@/assets/logo.png';
 import Contact from './Contact';
+import CustomerSupport from './CustomerSupport';
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/support" element={<CustomerSupport />} />
         <Route path="/productDetails/:productId" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} /> {/* Add Cart route */}
       </Routes>

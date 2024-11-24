@@ -69,6 +69,121 @@ const About = () => {
         </div>
       </div>
 
+      {/* Sustainability and Ethics Section */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-bold text-center mb-8">Our Commitment to Sustainability & Ethics</h2>
+        
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Column - Sustainability */}
+          <div className="space-y-6">
+            {/* Environmental Sustainability */}
+            <div className="bg-gradient-to-r from-pink-50 to-white rounded-xl shadow-lg p-8 border border-pink-100">
+              <h3 className="text-2xl font-bold text-pink-500 mb-4 flex items-center">
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z"/>
+                </svg>
+                Environmental Sustainability
+              </h3>
+              <div className="space-y-3 text-gray-600">
+                {[
+                  { title: "Eco-friendly Packaging", desc: "Recyclable and biodegradable packaging from recycled materials" },
+                  { title: "Cruelty-Free", desc: "Certified cruelty-free with no animal testing at any stage" },
+                  { title: "Sustainable Sourcing", desc: "Ethically sourced ingredients supporting sustainable agriculture" },
+                  { title: "Energy Efficiency", desc: "Powered by renewable energy with optimized consumption" },
+                  { title: "Zero-Waste Manufacturing", desc: "Zero-waste approach with complete material recycling" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start space-x-2 p-2 hover:bg-pink-50 rounded-lg transition-colors">
+                    <span className="text-pink-400 mt-1">•</span>
+                    <p>
+                      <span className="font-semibold text-pink-600">{item.title}:</span> {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Sustainability */}
+            <div className="bg-gradient-to-r from-pink-50 to-white rounded-xl shadow-lg p-8 border border-pink-100">
+              <h3 className="text-2xl font-bold text-pink-500 mb-4 flex items-center">
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+                </svg>
+                Social Sustainability
+              </h3>
+              <div className="space-y-3 text-gray-600">
+                {[
+                  { title: "Diversity and Inclusion", desc: "Marketing campaigns featuring diverse representation" },
+                  { title: "Fair Labor", desc: "Safe working conditions and fair wages across our supply chain" },
+                  { title: "Community Support", desc: "Product donations and partnerships with local NGOs" },
+                  { title: "Empowerment", desc: "Programs promoting self-expression and confidence" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start space-x-2 p-2 hover:bg-pink-50 rounded-lg transition-colors">
+                    <span className="text-pink-400 mt-1">•</span>
+                    <p>
+                      <span className="font-semibold text-pink-600">{item.title}:</span> {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Ethics */}
+          <div className="space-y-6">
+            {/* Integrity and Business Ethics */}
+            <div className="bg-gradient-to-r from-pink-50 to-white rounded-xl shadow-lg p-8 border border-pink-100">
+              <h3 className="text-2xl font-bold text-pink-500 mb-4 flex items-center">
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"/>
+                </svg>
+                Business Ethics
+              </h3>
+              <div className="space-y-3 text-gray-600">
+                {[
+                  { title: "Ingredient Transparency", desc: "Clear labeling and information for informed decisions" },
+                  { title: "Fair Pricing", desc: "Transparent pricing with no hidden fees" },
+                  { title: "Honest Marketing", desc: "Claims supported by rigorous testing" },
+                  { title: "Data Security", desc: "Strong customer privacy and data protection measures" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start space-x-2 p-2 hover:bg-pink-50 rounded-lg transition-colors">
+                    <span className="text-pink-400 mt-1">•</span>
+                    <p>
+                      <span className="font-semibold text-pink-600">{item.title}:</span> {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Community Involvement */}
+            <div className="bg-gradient-to-r from-pink-50 to-white rounded-xl shadow-lg p-8 border border-pink-100">
+              <h3 className="text-2xl font-bold text-pink-500 mb-4 flex items-center">
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                </svg>
+                Community Involvement
+              </h3>
+              <div className="space-y-3 text-gray-600">
+                {[
+                  { title: "Nonprofit Partnerships", desc: "Supporting beauty, wellness, and empowerment initiatives" },
+                  { title: "Workshops", desc: "Beauty workshops for underserved communities" },
+                  { title: "Giving Back", desc: "Regular product donations to those in need" },
+                  { title: "Local Support", desc: "Partnerships with local organizations and communities" }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start space-x-2 p-2 hover:bg-pink-50 rounded-lg transition-colors">
+                    <span className="text-pink-400 mt-1">•</span>
+                    <p>
+                      <span className="font-semibold text-pink-600">{item.title}:</span> {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* FAQs Section */}
       <FAQs />
 

@@ -59,7 +59,7 @@ const Contact = () => {
                 </svg>
               </span>
               <h2 className="mt-4 text-lg font-semibold text-gray-800">Call Us</h2>
-              <p className="mt-2 text-gray-600">Mon-Sat 9:00 AM - 6:00 PM</p>
+              <p className="mt-2 text-gray-600">Mon-Sun 9:00 AM - 6:00 PM</p>
               <a href="tel:+639123456789" className="mt-2 text-pink-500 hover:text-pink-600 font-medium block">
                 +63 912 345 6789
               </a>
