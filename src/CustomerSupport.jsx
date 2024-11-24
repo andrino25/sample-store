@@ -303,7 +303,7 @@ const CustomerSupport = () => {
               <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-400 border-2 border-white rounded-full animate-pulse"></span>
             </div>
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">Viora Customer Support</h1>
+              <h1 className="text-3xl font-bold tracking-tight">Vivi</h1>
               <p className="text-sm opacity-90 font-medium">Available 24/7 • Typically replies instantly</p>
             </div>
           </div>
@@ -328,7 +328,7 @@ const CustomerSupport = () => {
                     alt="Bot"
                     className="w-10 h-10 rounded-full border-2 border-pink-200 shadow-md"
                   />
-                  <span className="text-xs text-gray-500">Viora Bot</span>
+                  <span className="text-xs text-gray-500">Vivi</span>
                 </div>
               )}
               <div
