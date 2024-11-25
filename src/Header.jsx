@@ -29,6 +29,9 @@ function Header() {
             <Link to="/support" className="nav-link">Customer Support</Link>
           </li>
           <li>
+            <Link to="/testimonies" className="nav-link">Testimonies</Link>
+          </li>
+          <li>
             <Link to="/cart" className="nav-link">Cart</Link>
           </li>
         </ul>

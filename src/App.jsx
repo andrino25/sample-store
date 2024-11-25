@@ -1,6 +1,6 @@
 // App.js
 import React, { useEffect } from 'react'; // Import useEffect
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import About from './About';
@@ -10,6 +10,8 @@ import ProductDetails from './ProductDetails';
 import logo from '@/assets/logo.png';
 import Contact from './Contact';
 import CustomerSupport from './CustomerSupport';
+import Orders from './Orders';
+import Testimonies from './Testimonies';
 
 function App() {
 
@@ -32,6 +34,31 @@ function App() {
     document.head.appendChild(newFavicon);
   }, []); 
   
+  // Add these handler functions
+  const handleClearOrders = () => {
+    localStorage.removeItem('orders');
+    localStorage.removeItem('orderIntervals');
+    return <Navigate to="/orders" replace />;
+  };
+
+  // Add these handler functions
+  const handleClearTestimonials = () => {
+    localStorage.removeItem('testimonials');
+    return <Navigate to="/testimonies" replace />;
+  };
+
+  const handleClearRatings = () => {
+    localStorage.removeItem('productReviews');
+    return <Navigate to="/products" replace />;
+  };
+
+  const handleClearAll = () => {
+    localStorage.removeItem('orders');
+    localStorage.removeItem('orderIntervals');
+    localStorage.removeItem('productReviews');
+    return <Navigate to="/" replace />;
+  };
+
   return (
     <Router>
       <Header />
@@ -43,6 +70,12 @@ function App() {
         <Route path="/support" element={<CustomerSupport />} />
         <Route path="/productDetails/:productId" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} /> {/* Add Cart route */}
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/clearOrders" element={handleClearOrders()} />
+        <Route path="/clearRatings" element={handleClearRatings()} />
+        <Route path="/clearTestimonies" element={handleClearTestimonials()} />
+        <Route path="/clearAll" element={handleClearAll()} />
+        <Route path="/testimonies" element={<Testimonies />} />
       </Routes>
     </Router>
   );

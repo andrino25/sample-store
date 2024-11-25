@@ -1,0 +1,14 @@
+.rating-stars {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .star {
+    cursor: pointer;
+    color: #d1d5db;
+  }
+  
+  .star:hover,
+  .star.text-yellow-400 {
+    color: #fbbf24;
+  }

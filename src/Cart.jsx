@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";  // Import 'toast' along with 'ToastContainer'
 import Swal from 'sweetalert2';
 import "react-toastify/dist/ReactToastify.css";  // Import CSS for Toastify
+import './Cart.css';
+import { Link } from 'react-router-dom';
 
 export default function Cart() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [selectedItems, setSelectedItems] = useState({});
+  const [orders, setOrders] = useState([]);
+  const [orderStatuses, setOrderStatuses] = useState({});
+  const [selectAll, setSelectAll] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -64,6 +69,15 @@ export default function Cart() {
     }));
   };
 
+  const handleSelectAll = () => {
+    setSelectAll(!selectAll);
+    const newSelectedItems = {};
+    cart.forEach(item => {
+      newSelectedItems[item.uniqueId] = !selectAll;
+    });
+    setSelectedItems(newSelectedItems);
+  };
+
   const handleCheckout = () => {
     const checkedOutItems = cart.filter((item) => selectedItems[item.uniqueId]);
     
@@ -99,34 +113,40 @@ export default function Cart() {
       html: `
         <form id="checkoutForm" class="text-left">
           <!-- Personal Information -->
-          <div class="mb-6">
-            <h4 class="font-semibold text-gray-700 mb-3">Personal Information</h4>
+          <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-gray-700 mb-4 flex items-center">
+              <span class="bg-pink-500 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2">1</span>
+              Personal Information
+            </h4>
             <div class="space-y-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                 <input type="text" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500" required>
               </div>
               
               <div>
-                <label class="block text-sm font-medium text-gray-700">Contact Number</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
                 <input type="tel" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500" required>
               </div>
             </div>
           </div>
 
           <!-- Delivery Information -->
-          <div class="mb-6">
-            <h4 class="font-semibold text-gray-700 mb-3">Delivery Information</h4>
-            <div class="space-y-3">
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Delivery Address</label>
-                <input
-                  type="text"
-                  id="address"
-                  placeholder="Enter your address"
-                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
-                  required
-                >
+          <div class="mb-6 bg-gray-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-gray-700 mb-4 flex items-center">
+              <span class="bg-pink-500 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2">2</span>
+              Delivery Information
+            </h4>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
+              <input
+                type="text"
+                id="address"
+                placeholder="Enter your complete address"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"
+                required
+              >
+            </div>
           </div>
 
           <!-- Payment Method -->
@@ -180,7 +200,10 @@ export default function Cart() {
 
           <!-- Order Summary -->
           <div class="mt-6 bg-gray-50 p-4 rounded-lg">
-            <h4 class="font-semibold text-gray-700 mb-3">Order Summary</h4>
+            <h4 class="font-semibold text-gray-700 mb-4 flex items-center">
+              <span class="bg-pink-500 text-white w-6 h-6 rounded-full flex items-center justify-center mr-2">4</span>
+              Order Summary
+            </h4>
             <div class="space-y-3">
               ${checkedOutItems.map(item => `
                 <div class="flex items-center gap-3 p-2 bg-white rounded">
@@ -261,6 +284,9 @@ export default function Cart() {
       }
     }).then((result) => {
       if (result.isConfirmed) {
+        const selectedProducts = cart.filter((item) => selectedItems[item.uniqueId]);
+        handleSuccessfulCheckout(result.value, selectedProducts);
+        
         // Remove checked out items from cart
         setCart(prevCart => prevCart.filter((item) => !selectedItems[item.uniqueId]));
         setSelectedItems({});
@@ -280,12 +306,141 @@ export default function Cart() {
     });
   };
 
+  const handleSuccessfulCheckout = (checkoutData, selectedProducts) => {
+    const orderId = `ORDER${Date.now()}`;
+    const newOrder = {
+      id: orderId,
+      items: selectedProducts,
+      status: 'To Ship',
+      customerInfo: checkoutData,
+      timestamp: new Date(),
+    };
+
+    // Get existing orders
+    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+    const updatedOrders = [...existingOrders, newOrder];
+    
+    // Save to localStorage
+    localStorage.setItem('orders', JSON.stringify(updatedOrders));
+    setOrders(updatedOrders);
+
+    // Start status progression
+    startOrderProgression(orderId);
+  };
+
+  const startOrderProgression = (orderId) => {
+    setTimeout(() => {
+      // Move from To Ship to To Receive after 10 seconds
+      const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      const updatedOrders = currentOrders.map(order => {
+        if (order.id === orderId) {
+          return { ...order, status: 'To Receive' };
+        }
+        return order;
+      });
+      localStorage.setItem('orders', JSON.stringify(updatedOrders));
+    }, 15000);
+  };
+
+  const showRatingDialog = (orderId) => {
+    const order = orders.find(o => o.id === orderId);
+    if (!order) return;
+
+    Swal.fire({
+      title: 'Rate Your Purchase',
+      html: `
+        <div class="space-y-4">
+          ${order.items.map(item => `
+            <div class="border-b pb-4">
+              <p class="font-semibold">${item.name}</p>
+              <div class="rating-stars" data-product-id="${item.id}">
+                <i class="star fas fa-star" data-rating="1"></i>
+                <i class="star fas fa-star" data-rating="2"></i>
+                <i class="star fas fa-star" data-rating="3"></i>
+                <i class="star fas fa-star" data-rating="4"></i>
+                <i class="star fas fa-star" data-rating="5"></i>
+              </div>
+              <textarea 
+                class="w-full mt-2 p-2 border rounded" 
+                placeholder="Write your review..."
+                id="review-${item.id}"
+              ></textarea>
+            </div>
+          `).join('')}
+        </div>
+      `,
+      confirmButtonText: 'Submit Review',
+      confirmButtonColor: '#EC4899',
+      didOpen: () => {
+        // Initialize star rating functionality
+        document.querySelectorAll('.rating-stars').forEach(container => {
+          const stars = container.querySelectorAll('.star');
+          stars.forEach(star => {
+            star.addEventListener('click', () => {
+              const rating = star.dataset.rating;
+              stars.forEach(s => {
+                s.classList.toggle('text-yellow-400', s.dataset.rating <= rating);
+              });
+            });
+          });
+        });
+      },
+      preConfirm: () => {
+        // Collect ratings and reviews
+        return order.items.map(item => ({
+          productId: item.id,
+          rating: document.querySelector(`.rating-stars[data-product-id="${item.id}"] .text-yellow-400:last-child`)?.dataset.rating || 0,
+          review: document.querySelector(`#review-${item.id}`).value,
+          customerName: order.customerInfo.name,
+          date: new Date().toLocaleDateString()
+        }));
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Save reviews to localStorage
+        const existingReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
+        result.value.forEach(review => {
+          if (!existingReviews[review.productId]) {
+            existingReviews[review.productId] = [];
+          }
+          existingReviews[review.productId].push(review);
+        });
+        localStorage.setItem('productReviews', JSON.stringify(existingReviews));
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Thank you for your review!',
+          text: 'Your feedback helps us improve our products and services.',
+          confirmButtonColor: '#EC4899'
+        });
+      }
+    });
+  };
+
+  // Add cleanup function for intervals
+  useEffect(() => {
+    return () => {
+      // Clear all intervals when component unmounts
+      const intervals = JSON.parse(localStorage.getItem('orderIntervals')) || {};
+      Object.values(intervals).forEach(intervalId => clearInterval(intervalId));
+    };
+  }, []);
+
   return (
     <div className="mx-auto mt-10 max-w-2xl bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="flex h-full flex-col">
         <div className="px-6 py-4">
           <h2 className="text-2xl font-bold text-gray-800">Shopping Cart</h2>
           <div className="mt-6">
+            <div className="flex items-center mb-4 pb-2 border-b">
+              <input
+                type="checkbox"
+                checked={selectAll}
+                onChange={handleSelectAll}
+                className="mr-2 h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+              />
+              <span className="text-sm text-gray-600">Select All Items</span>
+            </div>
             <ul role="list" className="space-y-6">
               {cart.length > 0 ? (
                 cart.map((product) => (
@@ -358,6 +513,12 @@ export default function Cart() {
               Checkout
             </button>
           </div>
+          <Link 
+            to="/orders" 
+            className="mt-4 block text-center text-pink-600 hover:text-pink-700 font-medium"
+          >
+            View My Orders
+          </Link>
         </div>
       </div>
 
