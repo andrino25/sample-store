@@ -477,7 +477,7 @@ const ProductDetails = () => {
           <div className="w-full md:w-1/2 px-4 flex flex-col h-full">
             {/* Title and Price */}
             <div className="mb-6">
-              <h2 className="title">{selectedImage.name.split('-')[0].trim()}</h2>
+              <h2 className="title">{selectedImage.name}</h2>
               <div className="price-section">
                 <span className="price">₱{selectedImage.price}</span>
               </div>
