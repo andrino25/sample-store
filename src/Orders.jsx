@@ -120,11 +120,29 @@ const Orders = () => {
       customClass: {
         container: 'font-sans',
         popup: 'rounded-lg',
+      },
+      preConfirm: () => {
+        const reviews = [];
+        order.items.forEach((item, index) => {
+          const stars = document.querySelectorAll(`.rating-star-${index}.active`);
+          const review = document.querySelector(`#review-${index}`).value;
+          
+          reviews.push({
+            productId: item.id,
+            productName: item.name,
+            rating: stars.length,
+            review: review,
+            customerName: order.customerInfo.name,
+            date: new Date().toLocaleDateString()
+          });
+        });
+        return reviews; // Return the array of reviews
       }
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && Array.isArray(result.value)) {
         // Save reviews with product-type and shade-specific organization
         const existingReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
+        
         result.value.forEach(review => {
           const productType = review.productName.split('-')[0].trim();
           const shade = review.productName.split('-')[1].trim();
@@ -135,6 +153,7 @@ const Orders = () => {
           }
           existingReviews[reviewKey].push(review);
         });
+        
         localStorage.setItem('productReviews', JSON.stringify(existingReviews));
 
         // Update order status
