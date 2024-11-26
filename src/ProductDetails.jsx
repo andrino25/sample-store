@@ -415,10 +415,26 @@ const ProductDetails = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const productKey = `${product.name}-${selectedImage.name.split('-')[1].trim()}`;
-    const storedReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
-    const shadeReviews = storedReviews[productKey] || [];
-    setReviews(shadeReviews);
+    try {
+      // Get the product type and shade
+      const productType = product.name;
+      const shade = selectedImage.name.split('-')[1].trim();
+      const reviewKey = `${productType}-${shade}`;
+
+      // Get reviews from localStorage
+      const storedReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
+      console.log('Stored Reviews:', storedReviews); // Debug log
+      console.log('Review Key:', reviewKey); // Debug log
+      
+      const shadeReviews = storedReviews[reviewKey] || [];
+      console.log('Shade Reviews:', shadeReviews); // Debug log
+      
+      // Update reviews state
+      setReviews(shadeReviews);
+    } catch (error) {
+      console.error('Error loading reviews:', error);
+      setReviews([]);
+    }
   }, [selectedImage.name, product.name]);
 
   return (

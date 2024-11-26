@@ -307,39 +307,62 @@ export default function Cart() {
   };
 
   const handleSuccessfulCheckout = (checkoutData, selectedProducts) => {
-    const orderId = `ORDER${Date.now()}`;
-    const newOrder = {
-      id: orderId,
-      items: selectedProducts,
-      status: 'To Ship',
-      customerInfo: checkoutData,
-      timestamp: new Date(),
-    };
+    try {
+      // Generate unique order ID
+      const orderId = `ORDER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      // Create new order
+      const newOrder = {
+        id: orderId,
+        items: selectedProducts.map(item => ({
+          ...item,
+          orderItemId: `ITEM_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+          productType: item.name.split('-')[0].trim(),
+          shade: item.name.split('-')[1].trim()
+        })),
+        status: 'To Ship',
+        customerInfo: checkoutData,
+        timestamp: new Date().toISOString(),
+        total: selectedProducts.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 50
+      };
 
-    // Get existing orders
-    const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    const updatedOrders = [...existingOrders, newOrder];
-    
-    // Save to localStorage
-    localStorage.setItem('orders', JSON.stringify(updatedOrders));
-    setOrders(updatedOrders);
-
-    // Start status progression
-    startOrderProgression(orderId);
-  };
-
-  const startOrderProgression = (orderId) => {
-    setTimeout(() => {
-      // Move from To Ship to To Receive after 10 seconds
-      const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
-      const updatedOrders = currentOrders.map(order => {
-        if (order.id === orderId) {
-          return { ...order, status: 'To Receive' };
-        }
-        return order;
-      });
+      // Get and update orders in localStorage
+      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      const updatedOrders = [...existingOrders, newOrder];
       localStorage.setItem('orders', JSON.stringify(updatedOrders));
-    }, 15000);
+
+      // Start order progression with setTimeout
+      setTimeout(() => {
+        try {
+          // Get current orders from localStorage
+          const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
+          const progressedOrders = currentOrders.map(order => {
+            if (order.id === orderId) {
+              return { ...order, status: 'To Receive' };
+            }
+            return order;
+          });
+          
+          // Update localStorage with progressed orders
+          localStorage.setItem('orders', JSON.stringify(progressedOrders));
+          console.log('Order status updated to To Receive:', orderId);
+        } catch (error) {
+          console.error('Error updating order status:', error);
+        }
+      }, 15000); // 15 seconds delay
+
+      // Clear selected items from cart
+      const updatedCart = cart.filter(item => !selectedItems[item.uniqueId]);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+      setSelectedItems({});
+      calculateTotal(updatedCart);
+
+      return orderId;
+    } catch (error) {
+      console.error('Error in handleSuccessfulCheckout:', error);
+      throw error;
+    }
   };
 
   const showRatingDialog = (orderId) => {

@@ -6,16 +6,31 @@ import Swal from 'sweetalert2';
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   
+  // Load orders from localStorage
   useEffect(() => {
-    const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    setOrders(storedOrders);
+    const loadOrders = () => {
+      try {
+        const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+        console.log('Loaded orders:', storedOrders);
+        setOrders(storedOrders);
+      } catch (error) {
+        console.error('Error loading orders:', error);
+      }
+    };
 
-    const intervalId = setInterval(() => {
-      const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
-      setOrders(currentOrders);
-    }, 1000);
+    // Load initial orders
+    loadOrders();
 
-    return () => clearInterval(intervalId);
+    // Set up interval to check for updates
+    const intervalId = setInterval(loadOrders, 1000);
+
+    // Cleanup on unmount
+    return () => {
+      clearInterval(intervalId);
+      // Clear any existing timers
+      const timers = JSON.parse(localStorage.getItem('orderTimers')) || {};
+      Object.values(timers).forEach(timerId => clearTimeout(timerId));
+    };
   }, []);
 
   const getOrdersByStatus = (status) => {
@@ -127,50 +142,68 @@ const Orders = () => {
           const stars = document.querySelectorAll(`.rating-star-${index}.active`);
           const review = document.querySelector(`#review-${index}`).value;
           
+          if (!review.trim()) {
+            Swal.showValidationMessage('Please write a review for all items');
+            return false;
+          }
+          
           reviews.push({
-            productId: item.id,
-            productName: item.name,
+            orderItemId: item.orderItemId,
+            productId: item.productId,
+            productType: item.productType,
+            shade: item.shade,
             rating: stars.length,
-            review: review,
+            review: review.trim(),
             customerName: order.customerInfo.name,
-            date: new Date().toLocaleDateString()
+            date: new Date().toISOString(),
+            orderId: order.id
           });
         });
-        return reviews; // Return the array of reviews
+        return reviews;
       }
     }).then((result) => {
       if (result.isConfirmed && Array.isArray(result.value)) {
-        // Save reviews with product-type and shade-specific organization
-        const existingReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
-        
-        result.value.forEach(review => {
-          const productType = review.productName.split('-')[0].trim();
-          const shade = review.productName.split('-')[1].trim();
-          const reviewKey = `${productType}-${shade}`;
+        try {
+          // Save reviews
+          const existingReviews = JSON.parse(localStorage.getItem('productReviews')) || {};
           
-          if (!existingReviews[reviewKey]) {
-            existingReviews[reviewKey] = [];
-          }
-          existingReviews[reviewKey].push(review);
-        });
-        
-        localStorage.setItem('productReviews', JSON.stringify(existingReviews));
+          result.value.forEach(review => {
+            const reviewKey = `${review.productType}-${review.shade}`;
+            if (!existingReviews[reviewKey]) {
+              existingReviews[reviewKey] = [];
+            }
+            existingReviews[reviewKey].push(review);
+          });
+          
+          // Save reviews to localStorage
+          localStorage.setItem('productReviews', JSON.stringify(existingReviews));
 
-        // Update order status
-        const updatedOrders = orders.map(o => {
-          if (o.id === order.id) {
-            return { ...o, status: 'Received' };
-          }
-          return o;
-        });
-        localStorage.setItem('orders', JSON.stringify(updatedOrders));
-        setOrders(updatedOrders);
+          // Update order status
+          const updatedOrders = orders.map(o => {
+            if (o.id === order.id) {
+              return { ...o, status: 'Received', reviewedAt: new Date().toISOString() };
+            }
+            return o;
+          });
 
-        Swal.fire({
-          icon: 'success',
-          title: 'Thank you for your review!',
-          text: 'Your feedback helps us improve our products and services.'
-        });
+          // Save updated orders
+          localStorage.setItem('orders', JSON.stringify(updatedOrders));
+          setOrders(updatedOrders);
+
+          // Show success message
+          Swal.fire({
+            icon: 'success',
+            title: 'Thank you for your review!',
+            text: 'Your feedback helps us improve our products and services.'
+          });
+        } catch (error) {
+          console.error('Error saving review:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to save your review. Please try again.'
+          });
+        }
       }
     });
   };
