@@ -43,14 +43,16 @@ function App() {
 
   // Add these handler functions
   const handleClearTestimonials = () => {
-    localStorage.removeItem('testimonials');
-    return <Navigate to="/testimonies" replace />;
-  };
+    localStorage.setItem('testimonials', JSON.stringify([])); 
+    return <Navigate to="/products" replace />;
+};
+
 
   const handleClearRatings = () => {
     localStorage.removeItem('productReviews');
     return <Navigate to="/products" replace />;
   };
+
 
   const handleClearAll = () => {
     localStorage.removeItem('orders');

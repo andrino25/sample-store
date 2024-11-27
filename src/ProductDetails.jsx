@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import './ProductDetails.css';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Swal from 'sweetalert2';
 
 //matte liptint insertion
 import matteLipTintCherry from '@/assets/MatteLipTint/Cherry.png';
@@ -307,6 +308,8 @@ const ProductDetails = () => {
     return <div>Product not found</div>;
   }
 
+  
+
   const [selectedImage, setSelectedImage] = useState(product.images[0]);
   const [quantity, setQuantity] = useState(1);
 
@@ -315,6 +318,24 @@ const ProductDetails = () => {
     setSelectedImage(image);
     setSelectedProduct(product);
   };
+
+  const handleImageClick = (imageUrl) => {
+    Swal.fire({
+      imageUrl: imageUrl,
+      imageAlt: 'Proof of purchase',
+      width: 'auto',
+      showConfirmButton: false,
+      background: 'transparent',
+      padding: 0,
+      customClass: {
+        image: 'max-h-[80vh] object-contain',
+        closeButton: 'text-white',
+        popup: 'bg-transparent border-none shadow-none'
+      }
+    });
+  };
+
+  
 
   const handleQuantityChange = (value) => {
     setQuantity(prev => {
@@ -374,10 +395,42 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    return () => {
-      // Any cleanup needed
-    };
-  }, []);
+    try {
+      // Get the product type and shade
+      const productType = product.name;
+      const shade = selectedImage.name.split('-')[1].trim();
+      const reviewKey = `${productType}-${shade}`;
+  
+      // Get reviews from localStorage
+      const storedReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
+      console.log('Stored Reviews:', storedReviews); // Debug log
+      console.log('Review Key:', reviewKey); // Debug log
+      
+      const shadeReviews = storedReviews[reviewKey] || [];
+      console.log('Shade Reviews:', shadeReviews); // Debug log
+      
+      // Update reviews state
+      setReviews(shadeReviews);
+    } catch (error) {
+      console.error('Error loading reviews:', error);
+      setReviews([]);
+    }
+  }, [selectedImage.name, product.name]);
+
+  useEffect(() => {
+    try {
+      const storedTestimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
+      // Filter testimonials for current product type
+      const currentProductType = selectedImage.name.split('-')[0].trim();
+      const filteredTestimonials = storedTestimonials.filter(
+        t => t.product === currentProductType
+      );
+      setTestimonials(filteredTestimonials);
+    } catch (error) {
+      console.error('Error loading testimonials:', error);
+      setTestimonials([]);
+    }
+  }, [selectedImage.name]);
 
   const productDescriptions = {
     "Lip Gloss": {
@@ -437,6 +490,10 @@ const ProductDetails = () => {
     }
   }, [selectedImage.name, product.name]);
 
+  const [activeTab, setActiveTab] = useState('ratings');
+  const [testimonials, setTestimonials] = useState([]);
+
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto px-4 py-8">
@@ -495,8 +552,78 @@ const ProductDetails = () => {
                   </div>
                 ))}
               </div>
+
+              {/* Tabs Section - Moved here */}
+<div className="w-4/5 mx-auto border-t pt-6">
+  {/* Tabs */}
+  <div className="flex border-b mb-4">
+    <button
+      className={`px-4 py-2 mr-2 ${
+        activeTab === 'ratings'
+          ? 'border-b-2 border-pink-500 text-pink-600 font-semibold'
+          : 'text-gray-600 hover:text-pink-500'
+      }`}
+      onClick={() => setActiveTab('ratings')}
+    >
+      Ratings
+    </button>
+  </div>
+
+  {/* Tab Content */}
+  {activeTab === 'ratings' ? (
+    // Ratings Tab Content
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-gray-800">
+          Overall Product Ratings
+        </h3>
+        <div className="flex items-center">
+          <span className="text-2xl font-bold text-pink-600 mr-2">
+            {reviews.length > 0 
+              ? (reviews.reduce((acc, rev) => acc + Number(rev.rating), 0) / reviews.length).toFixed(1)
+              : '0.0'}
+          </span>
+          <span className="text-gray-500">
+            ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
+          </span>
+        </div>
+      </div>
+
+      {/* Rating Distribution */}
+      {reviews.length > 0 ? (
+        <div className="space-y-4">
+          {reviews.map((review, index) => (
+            <div key={index} className="bg-white p-4 rounded-lg shadow">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-medium text-gray-800">{review.customerName}</span>
+                <span className="text-gray-500 text-sm">{review.date}</span>
+              </div>
+              <div className="flex items-center mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <svg
+                    key={i}
+                    className={`w-5 h-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-600">{review.review}</p>
             </div>
-          </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-500 py-4">
+          No reviews yet for {selectedImage.name.split('-')[1].trim()}. Be the first to review this shade!
+        </p>
+      )}
+    </div>
+  ) : null}
+</div>
+</div>
+</div>
 
           {/* Right Column - Product Details */}
           <div className="w-full md:w-1/2 px-4 flex flex-col h-full">
@@ -599,59 +726,12 @@ const ProductDetails = () => {
               </button>
             </div>
             <ToastContainer />
-
-            <div className="mt-8 border-t pt-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">
-                  Ratings & Reviews for {selectedImage.name}
-                </h3>
-                <div className="flex items-center">
-                  <span className="text-2xl font-bold text-pink-600 mr-2">
-                    {reviews.length > 0 
-                      ? (reviews.reduce((acc, rev) => acc + Number(rev.rating), 0) / reviews.length).toFixed(1)
-                      : '0.0'}
-                  </span>
-                  <span className="text-gray-500">
-                    ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
-                  </span>
-                </div>
-              </div>
-
-              {reviews.length > 0 ? (
-                <div className="space-y-4">
-                  {reviews.map((review, index) => (
-                    <div key={index} className="bg-white p-4 rounded-lg shadow">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-medium text-gray-800">{review.customerName}</span>
-                        <span className="text-gray-500 text-sm">{review.date}</span>
-                      </div>
-                      <div className="flex items-center mb-2">
-                        {[...Array(5)].map((_, i) => (
-                          <svg
-                            key={i}
-                            className={`w-5 h-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`}
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                      </div>
-                      <p className="text-gray-600">{review.review}</p>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-gray-500 py-4">
-                  No reviews yet for {selectedImage.name.split('-')[1].trim()}. Be the first to review this shade!
-                </p>
-              )}
-            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default ProductDetails;

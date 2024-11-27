@@ -349,7 +349,7 @@ export default function Cart() {
         } catch (error) {
           console.error('Error updating order status:', error);
         }
-      }, 15000); // 15 seconds delay
+      }, 5000); // 15 seconds delay
 
       // Clear selected items from cart
       const updatedCart = cart.filter(item => !selectedItems[item.uniqueId]);
