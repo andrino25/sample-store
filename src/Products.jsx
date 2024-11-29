@@ -16,7 +16,7 @@ import cus3 from '@/assets/customer_three.jpg';
 const predefinedTestimonials = [
   {
     image: cus1,
-    name: 'Customer One',
+    name: 'Lila Moonstone',
     product: 'Matte Lip Tint',
     text: 'This matte lip tint is a game-changer! I have sensitive skin, and most lip products make my lips feel cracked, but this one is so smooth and comfortable. The color is vibrant, and it lasts for hours even through meals. Definitely worth every penny!',
     date: new Date().toISOString(),
@@ -25,7 +25,7 @@ const predefinedTestimonials = [
   },
   {
     image: cus2,
-    name: 'Customer Two',
+    name: 'Ava Winters',
     product: 'Lip Tint',
     text: 'I’m obsessed with this lip tint! It’s such a natural, long-lasting color that looks great with everything. The formula is really lightweight and doesn’t feel cakey or sticky. It’s perfect for a no-makeup look or for layering under lipstick for added depth.',
     date: new Date().toISOString(),
@@ -34,7 +34,7 @@ const predefinedTestimonials = [
   },
   {
     image: cus3,
-    name: 'Customer Three',
+    name: 'Seraphina Blaze',
     product: 'Lip Gloss',
     text: 'I love how this gloss enhances the natural color of my lips without feeling like I’m wearing anything at all. It’s super lightweight and leaves a beautiful, glossy finish that’s not too over-the-top. I’ve been using it every day.',
     date: new Date().toISOString(),
