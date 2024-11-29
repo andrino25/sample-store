@@ -10,7 +10,7 @@ const Orders = () => {
   useEffect(() => {
     const loadOrders = () => {
       try {
-        const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
+        const storedOrders = JSON.parse(localStorage.getItem('order-item')) || [];
         console.log('Loaded orders:', storedOrders);
         setOrders(storedOrders);
       } catch (error) {

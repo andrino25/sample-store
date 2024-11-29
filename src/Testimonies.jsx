@@ -2,14 +2,45 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 
+import cus1 from '@/assets/cutsomer_one.jpg';
+import cus2 from '@/assets/customer_two.jpg';
+import cus3 from '@/assets/customer_three.jpg';
+
+const predefinedTestimonials = [
+  {
+    image: cus1, // Use the imported image directly
+    name: 'Customer One',
+    product: 'Matte Lip Tint',
+    text: 'This matte lip tint is a game-changer! I have sensitive skin, and most lip products make my lips feel cracked, but this one is so smooth and comfortable. The color is vibrant, and it lasts for hours even through meals. Definitely worth every penny!',
+    date: new Date().toISOString(),
+    likes: 0,
+  },
+  {
+    image: cus2, // Use the imported image directly
+    name: 'Customer Two',
+    product: 'Lip Tint',
+    text: 'I’m obsessed with this lip tint! It’s such a natural, long-lasting color that looks great with everything. The formula is really lightweight and doesn’t feel cakey or sticky. It’s perfect for a no-makeup look or for layering under lipstick for added depth.',
+    date: new Date().toISOString(),
+    likes: 0,
+  },
+  {
+    image: cus3, // Use the imported image directly
+    name: 'Customer Three',
+    product: 'Lip Gloss',
+    text: 'I love how this gloss enhances the natural color of my lips without feeling like I’m wearing anything at all. It’s super lightweight and leaves a beautiful, glossy finish that’s not too over-the-top. I’ve been using it every day.',
+    date: new Date().toISOString(),
+    likes: 0,
+  },
+];
+
 const Testimonies = () => {
-  const [testimonials, setTestimonials] = useState([]);
+  const [testimonials, setTestimonials] = useState(predefinedTestimonials);
   const [filter, setFilter] = useState('all');
-  const [productFilter, setProductFilter] = useState('all');
+  const [productFilter, setProductFilter] = useState('All'); // Set default filter to 'All'
 
   useEffect(() => {
     const storedTestimonials = JSON.parse(localStorage.getItem('testimonials') || '[]');
-    setTestimonials(storedTestimonials);
+    setTestimonials(prev => [...prev, ...storedTestimonials]); // Append stored testimonials
   }, []);
 
   const handleAddTestimonial = () => {

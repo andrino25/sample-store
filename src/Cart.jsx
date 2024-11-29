@@ -327,15 +327,15 @@ export default function Cart() {
       };
 
       // Get and update orders in localStorage
-      const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+      const existingOrders = JSON.parse(localStorage.getItem('order-item')) || [];
       const updatedOrders = [...existingOrders, newOrder];
-      localStorage.setItem('orders', JSON.stringify(updatedOrders));
+      localStorage.setItem('order-item', JSON.stringify(updatedOrders));
 
       // Start order progression with setTimeout
       setTimeout(() => {
         try {
           // Get current orders from localStorage
-          const currentOrders = JSON.parse(localStorage.getItem('orders')) || [];
+          const currentOrders = JSON.parse(localStorage.getItem('order-item')) || [];
           const progressedOrders = currentOrders.map(order => {
             if (order.id === orderId) {
               return { ...order, status: 'To Receive' };
@@ -344,7 +344,7 @@ export default function Cart() {
           });
           
           // Update localStorage with progressed orders
-          localStorage.setItem('orders', JSON.stringify(progressedOrders));
+          localStorage.setItem('order-item', JSON.stringify(progressedOrders));
           console.log('Order status updated to To Receive:', orderId);
         } catch (error) {
           console.error('Error updating order status:', error);

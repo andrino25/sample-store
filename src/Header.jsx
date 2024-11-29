@@ -28,7 +28,6 @@ function Header() {
           <li>
             <Link to="/support" className="nav-link">Customer Support</Link>
           </li>
-
           <li>
             <Link to="/cart" className="nav-link">Cart</Link>
           </li>
