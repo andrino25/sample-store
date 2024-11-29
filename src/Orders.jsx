@@ -165,7 +165,7 @@ const Orders = () => {
       if (result.isConfirmed && Array.isArray(result.value)) {
         try {
           // Save reviews
-          const existingReviews = JSON.parse(localStorage.getItem('productReviews')) || {};
+          const existingReviews = JSON.parse(localStorage.getItem('productReviewsItem')) || {};
           
           result.value.forEach(review => {
             const reviewKey = `${review.productType}-${review.shade}`;
@@ -176,7 +176,7 @@ const Orders = () => {
           });
           
           // Save reviews to localStorage
-          localStorage.setItem('productReviews', JSON.stringify(existingReviews));
+          localStorage.setItem('productReviewsItem', JSON.stringify(existingReviews));
 
           // Update order status
           const updatedOrders = orders.map(o => {
@@ -187,7 +187,7 @@ const Orders = () => {
           });
 
           // Save updated orders
-          localStorage.setItem('orders', JSON.stringify(updatedOrders));
+          localStorage.setItem('order-item', JSON.stringify(updatedOrders));
           setOrders(updatedOrders);
 
           // Show success message

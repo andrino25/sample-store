@@ -394,20 +394,25 @@ const ProductDetails = () => {
     }
   };
 
-  useEffect(() => {
+  const [reviews, setReviews] = useState([]);
+
+  const loadReviews = () => {
     try {
       // Get the product type and shade
       const productType = product.name;
       const shade = selectedImage.name.split('-')[1].trim();
       const reviewKey = `${productType}-${shade}`;
-  
+
       // Get reviews from localStorage
-      const storedReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
+      const storedReviews = JSON.parse(localStorage.getItem('productReviewsItem') || '{}');
       console.log('Stored Reviews:', storedReviews); // Debug log
       console.log('Review Key:', reviewKey); // Debug log
       
       const shadeReviews = storedReviews[reviewKey] || [];
       console.log('Shade Reviews:', shadeReviews); // Debug log
+      
+      // Log the retrieved items in productReviews
+      console.log('Retrieved Reviews for', reviewKey, ':', shadeReviews); // Log retrieved reviews
       
       // Update reviews state
       setReviews(shadeReviews);
@@ -415,6 +420,10 @@ const ProductDetails = () => {
       console.error('Error loading reviews:', error);
       setReviews([]);
     }
+  };
+
+  useEffect(() => {
+    loadReviews(); // Load reviews whenever selected image or product changes
   }, [selectedImage.name, product.name]);
 
   useEffect(() => {
@@ -464,31 +473,6 @@ const ProductDetails = () => {
       ]
     }
   };
-
-  const [reviews, setReviews] = useState([]);
-
-  useEffect(() => {
-    try {
-      // Get the product type and shade
-      const productType = product.name;
-      const shade = selectedImage.name.split('-')[1].trim();
-      const reviewKey = `${productType}-${shade}`;
-
-      // Get reviews from localStorage
-      const storedReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
-      console.log('Stored Reviews:', storedReviews); // Debug log
-      console.log('Review Key:', reviewKey); // Debug log
-      
-      const shadeReviews = storedReviews[reviewKey] || [];
-      console.log('Shade Reviews:', shadeReviews); // Debug log
-      
-      // Update reviews state
-      setReviews(shadeReviews);
-    } catch (error) {
-      console.error('Error loading reviews:', error);
-      setReviews([]);
-    }
-  }, [selectedImage.name, product.name]);
 
   const [activeTab, setActiveTab] = useState('ratings');
   const [testimonials, setTestimonials] = useState([]);

@@ -349,7 +349,7 @@ export default function Cart() {
         } catch (error) {
           console.error('Error updating order status:', error);
         }
-      }, 5000); // 15 seconds delay
+      }, 8000); 
 
       // Clear selected items from cart
       const updatedCart = cart.filter(item => !selectedItems[item.uniqueId]);
@@ -421,14 +421,14 @@ export default function Cart() {
     }).then((result) => {
       if (result.isConfirmed) {
         // Save reviews to localStorage
-        const existingReviews = JSON.parse(localStorage.getItem('productReviews') || '{}');
+        const existingReviews = JSON.parse(localStorage.getItem('productReviewsItem') || '{}');
         result.value.forEach(review => {
           if (!existingReviews[review.productId]) {
             existingReviews[review.productId] = [];
           }
           existingReviews[review.productId].push(review);
         });
-        localStorage.setItem('productReviews', JSON.stringify(existingReviews));
+        localStorage.setItem('productReviewsItem', JSON.stringify(existingReviews));
 
         Swal.fire({
           icon: 'success',
